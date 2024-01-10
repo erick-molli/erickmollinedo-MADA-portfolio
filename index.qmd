@@ -8,7 +8,7 @@ editor: visual
 
 ### Hello and welcome to my portfolio!
 
-This is a space where I will be posting content for this course and you will get to know more about me
+This is a space where I will be posting content for this course and you will get to know more about me. It is still under wraps but it will keep upgrading as time passes.
 
 -   Please use the menu bar to explore about me and my projects
 -   Have fun!
