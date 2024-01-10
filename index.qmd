@@ -1,15 +1,16 @@
 ---
 title: "My website and data analysis portfolio"
+format: html
+editor: visual
 ---
 
-# Hello
+# Erick Mollinedo's MADA portfolio
 
-### And hello again
+### Hello and welcome to my portfolio!
 
-Welcome to **my website** and _data analysis portfolio._ 
+This is a space where I will be posting content for this course and you will get to know more about me
 
+-   Please use the menu bar to explore about me and my projects
+-   Have fun!
 
-* Please use the `Menu Bar` above to look around.
-* Have fun!
-
-**Feel free to change this text any way you want 😁!**
+**Feel free to contact me via email:** erick.mollinedo\@uga.edu

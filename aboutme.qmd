@@ -1,7 +1,35 @@
 ---
 title: "About me"
+format: html
+editor: visual
 ---
 
-Add some text and a figure describing myself.
+![When I presented my Master's thesis in a poster format](IMG_2080.jpg){fig-align="center" width="307"}
 
-For details, see the exercise instructions. 
+## Background
+
+My name is Erick Mollinedo, I was born and raised in Guatemala and I lived in here until I moved to the US in 2021 to become a graduate student. I am currently a PhD student from the Interdisciplinary Toxicology Program, where my research area is on Air pollution and Exposure assessment.
+
+## Education
+
+Current:
+
+-   PhD in Toxicology, at the Environmental Health Science department at the University of Georgia
+
+Previous:
+
+-   MS in Environmental Health Science at the University of Georgia
+
+-   BS in Biology at the Universidad del Valle de Guatemala, Guatemala
+
+## Professional Experience
+
+I have worked as a Graduate research assistant at UGA at the Naeher Lab in the Environmental Health Science department for 3 years. I have worked as a laboratory assistant at the Emerging Infectious Diseases Molecular biology laboratory at the Universidad del Valle de Guatemala, working in different projects about surveillance of respiratory, febrile and diarrhea diseases in the coast and highlands of Guatemala. These projects have been in collaboration with the CDC. I also worked in Guatemala as a field project manager for the Household Air Pollution Intervention Network Trial (HAPIN), one of the largest liquefied petrolleum gas (LPG) trials about the effects of household air pollution in low- and middle- income populations. You can find more about the HAPIN trial in [this site](https://www.hapintrial.org/).
+
+## Data Analysis Experience
+
+I have some knowledge about SAS statistical program and R and R Studio programming for statistical analysis. I recently took the EPID7500 class where I learned more and gained practice about R programming. This course, alongside other biostatistics courses such as BIOS 7020 and BIOS 8150, have helped me be more efficient in performing statistical analysis. Before that, I learned R using online tools such as textbooks, stack overflow and video tutorials, which I put on practice to work on my Master's thesis, derived from my work at the HAPIN trial. I have done data cleaning, mostly using excel, with the huge amount of datapoints obtained from HAPIN (more than 5000 records and over 2000 variables each), but with the recent skills from the EPID7500 course, I expect to practice data cleanign using R.
+
+## Fun Fact
+
+I have met and talked to two Nobel prize winners: Ada Yonath, as a Chemistry nobel prize winner for mapping the structure of the ribosomes and Rigoberta Menchu: Peace nobel prize winner for her continuous work to promote the right of indigenous people in Guatemala after the civil war. (I have pics that prove I met these nobel prize winners haha)
