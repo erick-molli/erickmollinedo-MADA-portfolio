@@ -12,7 +12,7 @@ bibliography: ../dataanalysis-template-references.bib
 csl: ../apa.csl
 ---
 
-#Malika Dhakhwa contributed to this exercise
+# Malika Dhakhwa contributed to this exercise
 
 The structure below is one possible setup for a data analysis project (including the course project). For a manuscript, adjust as needed. You don't need to have exactly these sections, but the content covering those sections should be addressed.
 
@@ -144,31 +144,31 @@ Note that this cited reference will show up at the end of the document, the refe
 For this exercise I plotted height of the individuals by their occupation.
 
 ```{r}
-#| label: fig1-result
+#| label: fig-boxplot
 #| fig-cap: "Boxplot of individuals height by occupation"
 #| echo: FALSE
 knitr::include_graphics(here("starter-analysis-exercise","results","figures","Occupation-height.png"))
 ```
 
-Based on @fig1-result, we can see that individuals that work on agriculture have the greatest height and there is not much variation in range. However, individuals that work on industry are the ones that have a lot of variation and most of them are in the 25th percentile. We cannot infer much about individuals that work for government, or occupation or in other professions, since there is just one data point for these. However, it seems that the greatest height are at individuals that work doing household chores.
+Based on @fig-boxplot, we can see that individuals that work on agriculture have the greatest height and there is not much variation in range. However, individuals that work on industry are the ones that have a lot of variation and most of them are in the 25th percentile. We cannot infer much about individuals that work for government, or occupation or in other professions, since there is just one data point for these. However, it seems that the greatest height are at individuals that work doing household chores.
 
 ```{r}
-#| label: fig2-result
+#| label: fig-plot
 #| fig-cap: "Basic plot of Age by Weight"
 #| echo: FALSE
 knitr::include_graphics(here("starter-analysis-exercise","results","figures","Weight-age.png"))
 ```
 
-@fig2-result shows that there appears to be an association between age and weight. Based on the linear model, there could be an increase of weight by age, since biologically we cannot say that age increases by weight.
+@fig-plot shows that there appears to be an association between age and weight. Based on the linear model, there could be an increase of weight by age, since biologically we cannot say that age increases by weight.
 
 ```{r}
-#| label: tbl1-resulttable
+#| label: tbl-resulttable3
 #| tbl-cap: "Linear model fit table including age and occupation"
 #| echo: FALSE
-resulttable2 = readRDS(here("starter-analysis-exercise","results","tables-files","resulttable3.rds"))
+resulttable3 = readRDS(here("starter-analysis-exercise","results","tables-files","resulttable3.rds"))
 knitr::kable(resulttable3)
 ```
 
-In @tbl1-resulttable we can observe a model fit to predict Height as a function of age and occupation. The model explains the interactions, however none of the occupations and/or age are statistically significant based on the p-value.
+In @tbl-resulttable3 we can observe a model fit to predict Height as a function of age and occupation. The model explains the interactions, however none of the occupations and/or age are statistically significant based on the p-value.
 
 # References
