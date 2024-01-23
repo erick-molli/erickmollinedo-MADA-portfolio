@@ -1,5 +1,123 @@
 ---
 title: "R Coding Exercise"
+author: Erick Mollinedo
+date: 01-23-2024
 ---
 
-Placeholder file for the future R coding exercise.
+The following space lists all the packages I used for this exercise:
+
+```{r}
+library(dslabs)
+library(tidyverse)
+```
+
+I explored the `gapminder` dataset from the `dslabs` package using the `help()` function to pull out the help page that describes the dataset
+
+```{r}
+help("gapminder")
+```
+
+I explored the structure of the dataset using the `str()` function, the summary using the `summary()` function and used the `class()` function to check the type of object for this dataset.
+
+```{r}
+str(gapminder)
+summary(gapminder)
+class(gapminder)
+```
+
+First, I created the object `africadata`, which includes only observations from Africa. And then I checked the structure and summary of the new object using `str()` and `summary()`
+
+```{r}
+#I used the 'filter()' function to select only the observations from Africa, using the variable 'continent'
+africadata <- gapminder %>% filter(continent == "Africa")
+
+#Check if the new object was correctly saved using the 'str()' and 'summary()' functions
+str(africadata)
+summary(africadata)
+```
+
+Here, I created two new objects. `africachild` contains only the variables `infant_mortality` and `life_expectancy`, meanwhile `africapop` contains the `population` and `life_expectancy` variables. To do this I used the `select()` function. And then I explored the structure and summary of both new objects using `str()` and `summary()` to check if the objects were correctly created.
+
+```{r}
+#Creating new objects, using the 'select()' function to choose only the variables I need from the original dataset
+africachild <- africadata %>% select(c(infant_mortality, life_expectancy))
+africapop <- africadata %>% select(c(population, life_expectancy))
+
+#Using 'str()' to check the structure of the new objects
+str(africachild)
+str(africapop)
+
+#Using 'summary()' to check the summary of the new objects
+summary(africachild)
+summary(africapop)
+```
+
+Now, I created a graph that illustrates `life expectancy` as a function of `child mortality` using `ggplot()`, with the `africachild` object.
+
+```{r}
+#Plotting life expenctancy as a function of infant mortality, using the 'ggplot()' package, in this case I used a point geometry using 'geom_point()'
+ggplot(data= africachild, aes(x= infant_mortality, y= life_expectancy))+
+  geom_point()
+```
+
+It is observed that there is a negative correlation between infant mortality and life expectancy.
+
+And here, I created a graph that shows `life expectancy` as a function of `population` using `ggplot()`, with the `africapop` object.
+
+```{r}
+#I used the 'geom_point()' geometry to plot the data points and set the x-axis to log scale using 'scale_x_log10()'.
+ggplot(data= africapop ,aes(x= population, y= life_expectancy))+
+  geom_point()+
+  scale_x_log10()
+```
+
+There is a positive correlation between life expectancy and population size, however there can be observed some weird 'streaks'. If looking at the original dataset, this includes the population size from 1960 to 2016, so there are actually many years of observations instead of just one.
+
+I noticed there are years with missing data (NAs). To figure out which years have missing data I used the `is.na()` function in combination with `filter()`.
+
+```{r}
+#Use `filter(is.na(infant_mortality)) to filter all observation that have missing values (NAs). Then I used 'count(year)', to summarize which years have the selected missing data.
+africadata %>% filter(is.na(infant_mortality)) %>% count(year)
+```
+
+There is missing info on infant mortality from the years 1960 to 1981 and 2016. So it was best to choose a specific year for the analysis. Here, I created a new object `africa2000` with only data from the year 2000. Then I checked the new data frame using `str()` and `summary()`
+
+```{r}
+#Create the object 'africa2000' using the 'filter()' function on the variable 'year' to select only the observations from the year 2000.
+africa2000 <- africadata %>% filter(year == 2000)
+
+#Check the new object using 'str()' and 'summary()'
+str(africa2000)
+summary(africa2000)
+```
+
+And here I made a new plot for `life expectancy` as a function of `infant mortality` for the year 2000 only.
+
+```{r}
+ggplot(data= africa2000 ,aes(x= infant_mortality, y= life_expectancy))+
+  geom_point()
+```
+
+And another plot of `life expectancy` as a function of `population` for the year 2000 only.
+
+```{r}
+ggplot(data= africa2000 ,aes(x= population, y= life_expectancy))+
+  geom_point()+
+  scale_x_log10()
+```
+
+It is observed a negative association between infant mortality and life expectancy, however, the association between life expectancy and population is not clear. To do additional modeling, I tried to fit a linear model using the `lm()` function on the `africa2000` dataset. I used `life expectancy` as the outcome and `infant mortality` as a predictor in the `fit1` model, and `life_expectancy` also as outcome and `population` as the predictor in the `fit2` model.
+
+```{r}
+fit1 <- lm(life_expectancy ~ infant_mortality, data = africa2000)
+fit2 <- lm(life_expectancy ~ population, data = africa2000)
+```
+
+And finally I used the `summary()` function to look at the fit results for both models.
+
+```{r}
+summary(fit1)
+summary(fit2)
+```
+
+Based on the `fit1` model, it is observed that infant mortality is statistically associated to life expectancy (p<0.001). It seems that life expectancy decreases as infant mortality increases. However, it appears there is no association between life expectancy and population size, according to the `fit2` model, given p= 0.616, so there could be a different model that explains this association.
