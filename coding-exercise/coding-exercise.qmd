@@ -1,7 +1,7 @@
 ---
 title: "R Coding Exercise"
 author: Erick Mollinedo
-date: 01-23-2024
+date: 01-25-2024
 ---
 
 The following space lists all the packages I used for this exercise:
