@@ -121,3 +121,153 @@ summary(fit2)
 ```
 
 Based on the `fit1` model, it is observed that infant mortality is statistically associated to life expectancy (p<0.001). It seems that life expectancy decreases as infant mortality increases. However, it appears there is no association between life expectancy and population size, according to the `fit2` model, given p= 0.616, so there could be a different model that explains this association.
+
+
+## This section is contributed by *Kelly Cao*
+### Loading and Checking Data
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+The following section shows that the data set `us_contagious_diseases` has 6 potential variables to analyze: disease (name), state, year, weeks_reporting, count (number of cases), and population. The 6 variables are reported for the following contagious diseases: Hepatitis A, Measles, Mumps, Pertussis, Polio, Rubella, and Smallpox for the US states. 
+
+```{r}
+#Installing and loading needed packages with the command install.packages() and the library() function
+library("dslabs")
+library(renv)
+library(tidyverse)
+
+#The help() function is used to look at data provided in 'us_contagious_diseases'
+help(us_contagious_diseases)
+
+#Check the summary, class, and structure of the data set 'us_contagious_diseases'
+str(us_contagious_diseases)
+summary(us_contagious_diseases)
+class(us_contagious_diseases)
+```
+
+### Processing and Cleaning Data
+I chose to use the  `count`, `weeks_reporting`, and `disease` columns to process and clean. After processing, the `disease_count` object was created to represent the columns of `count` and `disease`. No further filtering was performed on that object. Another object, `Weeks_Count`, is used to represent `count` and `weeks_reporting`. In addition to the `select()` function used to select the two columns, the `filter()` function was used to remove any rows that had `weeks_reporting`= 0, as that suggest no reporting was done for those selected data points. After that was excluded, 288 observations were left in the `Weeks_Count` object.
+```{r}
+#An object is created that includes only data from the state of Georgia using the pipe operator and the filter() function.
+Georgia_data <-
+  us_contagious_diseases %>%
+  filter(state == 'Georgia')
+
+#The str() and summary() function is used to verify that the object was made correctly
+str(Georgia_data)
+summary(Georgia_data)
+
+#Another object is created with 'weeks_reporting' and 'count'. This will group the total number of reported cases with the number of weeks counts were reported for that year. The rows that had  0 in "weeks_reporting" were excluded with the filter() function.
+Weeks_Count <- 
+  select(Georgia_data, weeks_reporting, count) %>%
+  filter(weeks_reporting !=0)
+
+#The str() and summary() function is used to verify that the object was made correctly
+str(Weeks_Count)
+summary(Weeks_Count)
+
+#Another object is created with 'disease' and 'count', which would group the disease type with the total number of reported cases in Georgia into one object. 
+disease_count<- select(Georgia_data, count, disease)
+
+#The str() and summary() function is used to verify that the object was made correctly
+str(disease_count)
+summary(disease_count)
+```
+
+### Plots
+I plotted the `Weeks_Count` object as a scatter plot, with the total number of reported cases being plotted as a function of the number of weeks reported in the state of Georgia. When fully plotted with a line of best fit, visually, there appears to be a positive correlation between the number of reported case and the number of weeks that the counts were reported, which makes logical sense. The total number of cases reported will increase when the time that is used to collect the reported response increase. 
+```{r}
+#Using the package ggplot2 (which is found in tidyverse) to create a scatter plot using the variables in the object 'Weeks_Count' and assigning it to the variable 'p1
+
+p1 <- ggplot(Weeks_Count, aes(x = weeks_reporting, y = log(count))) +geom_point()+ geom_smooth(method = "lm")+
+      ggtitle('Number of Weeks Reporting vs the Number of Reported Case')+
+      theme(plot.title= element_text(hjust=0.5))+
+      xlab('Number of Weeks Reporting')+
+      ylab('Total Number of Reported Cases (log-scaled)')+
+      labs(caption = "Figure 1: The total number of reported cases plotted as a function of the number of weeks reported in the state of Georgia")+
+      theme(plot.caption = element_text(hjust=0, face="bold"))
+
+#The theme() function was a great way to manipulate the specific element in the plot, whether it was color, size, or orientation of the text or visuals.
+
+#Using the plot() function to determine if the plot was properly created
+plot(p1)
+```
+
+Similar to `P1`, I initially plotted `disease_count` as a bar graph to visualize the number of reported cases per disease type. This is shown in `p2`. Upon initial observation of the graph, it is clear that compared to the other disease listed, `Measles` easily acted as an outlier in the data set with the greatest number of reported case by far. This is followed by `Pertussis` and `Hepatitis A`. 
+
+```{R}
+#Repeating the previous two steps to plot 'disease_count' in 'p2'
+p2 <- ggplot(disease_count, aes(x = disease, y = count)) + geom_bar(stat = "identity", position = "dodge", fill = "skyblue")+
+      ggtitle('The Type of Disease vs The Number of Reported Case')+
+      theme(plot.title= element_text(hjust=0.5))+
+      xlab('Disease Type')+
+      ylab('Total Number of Reported Cases')+
+      labs(caption = "Figure 2: The total number of reported cases plotted as a function of the disease type reported in the state of Georgia")+
+      theme(plot.caption = element_text(hjust=0, face="bold"))
+
+#print the plot
+plot(p2)
+```
+
+As I was unable to discern any valuable information for the disease `Smallpox` or `Rubella` due to the scaling, I replotted the graph as a violin plot overlayed with plot points to better visualize the spread of the data over the different disease while accounting for the outlier that caused the scaling issue. I plotted this as `p2_2`.The violin plot showed the data distribution and the density of each variable. The individual data points overlaps it for more visual clarity. 
+```{R}
+#When looking at the previous plot, there is a distinct outlier for the Measles category, thus making it difficult to determine the value that's provided from the other disease. To combat that, another plot was created to improve the clarity of the visualization of the same data set.
+p2_2 <- ggplot(disease_count, aes(x = disease, y = log(count))) + 
+      geom_violin(fill = "lightblue", color = "blue", alpha = 0.7) +
+      geom_jitter(width = 0.2, color = "red", alpha = 0.7) + 
+      ggtitle('The Type of Disease vs The Number of Reported Case')+
+      theme(plot.title= element_text(hjust=0.5))+
+      xlab('Disease Type')+
+      ylab('Total Number of Reported Cases (log-scaled)')+
+      labs(caption = "Figure 3: The total number of reported cases plotted as a function of the disease type reported in the state of Georgia")+
+      theme(plot.caption = element_text(hjust=0, face="bold"))
+
+#print the plot
+plot(p2_2)
+
+```
+#### Additional plot for fun
+Looking at `Figure 4`, one can see that aside from `Polio` all of the other diseases listed show a upward positive trend. This suggests that `Polio` have little change case reported despite the time elapse, which aligns with historical and public vaccination efforts. Looking at `Measles`, it showed the greatest positive slope, showing the greatest growth in number of case over some set of time, which corroborates what is shown in `Figure 2`.
+```{r}
+#Replotting p1 with clearly assigned data point to disease variable. Compared to p1, I added color and a legend to the points to distinguish which data point represent which disease type. 
+p4 <- ggplot(Georgia_data, aes(x = weeks_reporting, y = log(count), color = disease, label = disease)) +geom_point()+ geom_smooth(method = "lm")+
+      ggtitle('Number of Weeks Reporting vs the Number of Reported Case')+
+      theme(plot.title= element_text(hjust=0.5))+
+      xlab('Number of Weeks Reporting')+
+      ylab('Total Number of Reported Cases (log-scaled)')+
+      labs(caption = "Figure 4: The total number of reported cases plotted as a function of the number of weeks reported in the state of Georgia")+
+      theme(plot.caption = element_text(hjust=0, face="bold"))+
+      labs(color = "Disease Type")
+
+#The theme() function was a great way to manipulate the specific element in the plot, whether it was color, size, or orientation of the text or visuals.
+
+#Using the plot() function to determine if the plot was properly created
+plot(p4)
+```
+
+### Analysis and Conclusion
+I then fitted both objects to a linear model, with `count` as thte outcome for both models and `weeks_reporting` and `disease` as the predictor respectively.
+
+Based on the results of the linear model analysis, both models seem fairly reliable with `lmfit2` having the edge. 
+
+The second model has a higher R-squared, suggesting that it explains a larger proportion of variance in the response variable. The F-statistic is greater in this model, indicating a better overall fit. 
+
+The low p-value for `lmfit1` suggests that `weeks_reporting` may have some significance in predicting the outcome `count`. The same is especially true for the second model. 
+
+The `lmfit2` model also had a lower residual standard error compared to `lmfit1`, further suggesting that the second model's prediction are closer to the actual value on average. 
+
+Based on the following observation, `lmfit2` appears to perform as the better model, with a more significant predictor, a higher proportion of explained variance, a higher F-statistic, and a lower residual standard error. 
+
+```{r}
+#Fitting the data set to a linear model with 'count' as the outcome and 'weekly_reporting' as the predictor
+lmfit1 <- lm(count ~ weeks_reporting, Weeks_Count)
+
+#Use the summary() command to check over the fit 
+summary(lmfit1)
+
+#Fitting the data set to a linear model with 'count' as the outcome and 'disease' as the predictor
+lmfit2 <- lm(count ~ disease, disease_count)
+
+#Use the summary() command to check over the fit 
+summary(lmfit2)
+```
