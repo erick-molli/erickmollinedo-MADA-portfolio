@@ -1,0 +1,167 @@
+---
+title: "Data Exercise"
+author: Erick Mollinedo
+date: 02-02-2024
+---
+
+## Option 2: Synthetic data
+
+For this exercise I chose to create a dataset somewhat similar to the expected data I plain to obtain from a future research project I will be working on. The dataset is about a hypothetical project that assesses the health effects of exposure to air pollutants in wildland firefighters.
+
+These are the packages used for this exercise:
+
+```{r}
+library(here)
+library(tidyverse)
+library(lubridate)
+library(gtsummary)
+```
+
+### Creating the dataset
+
+First, I set a seed for reproducibility and then I defined the number of observations for this dataset
+
+```{r}
+set.seed(123)
+
+#Defined 60 as the number of observations (n=60 wildland firefighters)
+n_wffs <- 60
+```
+
+In this part I created the empty data frame `wff_data` with thirteen variables, which includes the ID, Date, three socio-demographic variables, PM2.5 as an exposure, two potential confounders and two outcomes.
+
+```{r}
+wff_data <- data.frame(
+  ID = numeric(n_wffs),
+  Date = as_date(character(n_wffs)),
+  Age = numeric(n_wffs),
+  Gender = character(n_wffs),
+  Ethnicity = character(n_wffs),
+  PM2.5 = numeric(n_wffs),
+  Medication = integer(n_wffs),
+  Smoking = integer(n_wffs),
+  FVC = numeric(n_wffs),
+  PAH = numeric(n_wffs)
+)
+```
+
+And here I fill each variable with their respective values
+
+```{r}
+#Variable 1: ID
+wff_data$ID <- 1:n_wffs
+
+#Variable 2: Date
+wff_data$Date <- as_date(sample(seq(from = as_date("2024-01-08"), to = as_date("2024-03-01"), by= "days"), n_wffs, replace = T))
+
+#Variable 3: Age. Specifying that the ranges should be from 22 to 55 years old
+wff_data$Age <- sample(22:55, 60, replace = TRUE)
+
+#Variable 4: Gender. Specifying that there should be more males than females using the `prob =` statement
+wff_data$Gender <- map_chr(sample(c("Male", "Female"), n_wffs, replace = T, prob = c(0.84, 0.16)), as.character)
+
+#Variable 5: Ethnicity. Specifying the proportions for each ethnicity.
+wff_data$Ethnicity <- map_chr(sample(c("Caucasian", "African American", "Hispanic/Latino", "American Indian"),
+                                  n_wffs, replace = T, prob = c(0.75, 0.15, 0.05, 0.05)), as.character)
+
+#Variable 6: PM2.5 (in micrograms per cubic meter). The concentrations were computed following a log-normal distribution `rlnorm()`, characteristic of PM2.5 data.
+wff_data$PM2.5 <- round(rlnorm(n_wffs, meanlog = log(30), sdlog = 0.5), 2)
+
+#Variable 7: Medication (If the participants take any medication for blood pressure). 0= No medication, 1=Medication. This variable depends on Age, with higher age, the highest the probability of taking blood pressure medication, using 40 years old as a cutoff point.
+wff_data$Medication[wff_data$Age <= 40 ] <- map_int(sample(0:1, sum(wff_data$Age <= 40) , replace = T, prob = c(0.95, 0.05)), as.integer)
+wff_data$Medication[wff_data$Age > 40 ] <- map_int(sample(0:1, sum(wff_data$Age > 40) , replace = T, prob = c(0.6, 0.4)), as.integer)
+
+#Variable 8: Smoking. 0=Doesn't smoke, 1=Smokes. Specifying that there are more non-smokers than smokers.
+wff_data$Smoking <- map_int(sample(0:1, n_wffs, replace = T, prob = c(0.85, 0.15)), as.integer)
+
+#Variable 9: Forced Vital capacity (FVC) measured by spirometry. The mean value of FVC is dependent on Gender.
+wff_data$FVC[wff_data$Gender == "Male"] <- round(rnorm(sum(wff_data$Gender == "Male"), mean = 5.3, sd = 1), 1)
+wff_data$FVC[wff_data$Gender == "Female"] <- round(rnorm(sum(wff_data$Gender == "Female"), mean = 3.5, sd = 0.5), 1)
+
+#Variable 10: Polycyclic Aromatic Hydrocarbons (PAHs) from urine samples.(There are multiple PAHs, but in this case I assume that 3-Hydroxybenzo(a)pyrene was measured). The PAH level depends on the PM2.5 concentration, with higher PM2.5 exposure, the higher the level of urine PAH.
+wff_data$PAH[wff_data$PM2.5 <= 45] <- round(rnorm(sum(wff_data$PM2.5 <= 45), mean = 0.12, sd= 0.04), 3)
+wff_data$PAH[wff_data$PM2.5 > 45] <- round(rnorm(sum(wff_data$PM2.5 > 45), mean = 0.31, sd= 0.04), 3)
+
+```
+
+And here, checking that the data frame looks good
+
+```{r}
+head(wff_data)
+```
+
+I saved the data frame in a .rds file
+
+```{r}
+saveRDS(wff_data, here("data-exercise", "data", "wff_data.Rds"))
+```
+
+### Explore and analyze the dataset
+
+First I explored the dataset using `summary()`
+
+```{r}
+summary(wff_data)
+```
+
+And now I created a summary table with some of the descriptive statistics of this dataset, separating by gender.
+
+```{r}
+#Just showing the summary statistics of age, ethnicity, PM2.5, FVC and PAHs, computing the mean and sd, median and IQR and the minimum and maximum values
+sumtable <- wff_data %>% select(Age, Gender, PM2.5, FVC, PAH) %>% 
+  tbl_summary(by= Gender, 
+              type = all_continuous() ~ "continuous2",
+              statistic = all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})", "{min}, {max}")) %>% 
+  bold_labels()
+
+#Print the generated table
+sumtable
+```
+
+First I want to plot a histogram to check if the PM2.5 data follow a normal distribution (it should not)
+
+```{r}
+ggplot(wff_data, aes(x= PM2.5))+
+  geom_histogram()+
+  theme_bw()
+```
+
+The histogram confirms that the concentrations do not follow a normal distribution, since the data is right-skewed. This should follow a logarithmic distribution.
+
+Here I am showing a plot to explore the association between the level of urine PAHs and PM2.5 concentration from the wildland firefighter subjects. I decided to separate them by gender.
+
+```{r}
+ggplot(wff_data, aes(x= PM2.5, y= PAH, color= Gender))+
+  geom_point(size= 4)+
+  labs(x= "PM2.5 concentration (ug/m3)", y= "PAH level (ug/L)")
+```
+
+Based on the graphic, it seems that the level of PAHs is positively associated with PM2.5 concentration.
+
+Next, I am showing a graph that explores the association between FVC and PM2.5.
+
+```{r}
+ggplot(wff_data, aes(x= PM2.5, y=FVC))+
+  geom_point(shape= 25, fill= "steelblue1", size= 3)+
+  labs(x= "PM2.5 Concentration (ug/m3)", y= "FVC (L)")
+```
+
+Based on this graph, it is hard to tell if FVC depends on PM2.5 concentration. Given so, I decided to fit a model and check for associations. In this case, since PM2.5 follows a log-normal distribution, I decided to use a log generalized linear model from the quasipoisson family. I used `PM2.5`, `Smoking` and `Medication` as predictors for `FVC` as an outcome.
+
+```{r}
+log_fit <- glm(FVC ~ PM2.5 + Smoking + Medication, data = wff_data, family = quasipoisson(link = "log"))
+
+summary(log_fit)
+```
+
+Based on the `log_fit` model, it seems that there is no interaction of PM2.5 or any of the covariates to the `FVC` outcome. Which makes sense, since this outcome was mapped independently from the PM2.5 concentrations. However, in the real-life study I hope to find an association among these variables.
+
+And finally, a model to explore if PM2.5 is a predictor of PAH levels. Also assessing `Smoking` and `Medication` as confounders.
+
+```{r}
+log_fit2 <- glm(PAH ~ PM2.5 + Smoking + Medication, data = wff_data, family = quasipoisson(link = "log"))
+
+summary(log_fit2)
+```
+
+In this case, we reject the null hypothesis that there is no association between PM2.5 and PAH levels (the outcome). Of course this was expected, since this was one of the requirements when creating the data set. Based on this model we didn't find an association between smoking and the use of medication with the PAH outcome.
