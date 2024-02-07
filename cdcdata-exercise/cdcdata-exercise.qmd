@@ -1,0 +1,211 @@
+---
+title: "CDC Data Exercise"
+author: Erick Mollinedo
+date: 02-07-2024
+---
+
+## Salmonella paratyphi and Salmonella typhi infection to Salmonellosis in 2019
+
+These are the packages used for this exercise:
+
+```{r}
+library(here)
+library(tidyverse)
+```
+
+The following dataset is about the provisional cases of Salmonellosis for the year 2019 in the United States regions, the US territories and non-US residents. Salmonellosis is part of the national notifiable diseases reported from the National Notifiable Diseases Surveillance System (NNDSS). The cases are reported by the state health departments to the Centers for Disease Control and Prevention (CDC) on a weekly basis. This dataset was obtained from the CDC data website <https://data.cdc.gov/>, and the original dataset was downloaded from [this link](https://data.cdc.gov/NNDSS/NNDSS-TABLE-1EE-Salmonella-Paratyphi-infection-to-/hs59-amfp/about_data).
+
+### Cleaning the dataset
+
+The following code chunk details about loading the dataset into the `salmonella` object.
+
+```{r}
+#Load the dataset into the `salmonella` object
+salmonella <- read_csv(here("cdcdata-exercise", "data", "Salmonella_CDC_2019.csv"))
+
+#Explore the dimensions of the dataset
+nrow(salmonella)
+ncol(salmonella)
+```
+
+This dataset has 1470 observations and 29 variables, among those variables I am only interested in some, since some are repetitive or have a lot of non-reported (blank or missing values). So in this part of the code I am deleting most of the variables, so I only have the location area, the week, and the weekly reported cases of Salmonella typhi, Salmonella paratyphi and Salmonellosis (which represents cases of Salmonella other than S. paratyphi and S. typhi).
+
+```{r}
+#Using the `select()` function to choose only 5 variables
+salmonella <- salmonella %>% select(c(`Reporting Area`, `MMWR Week`, `Salmonella Paratyphi infection§, Current week`, `Salmonella Typhi infection¶, Current week`, `Salmonellosis (excluding Salmonella Paratyphi infection and Salmonella Typhoid infection)**, Current week`))
+```
+
+Here I am changing the name of the variables, so they are easier to read, then I am changing the `NA` values to `0`, so they are not inputed as NAs.
+
+```{r}
+#First renaming all the columns using the `rename()` function
+salmonella <- salmonella %>% rename(Region = `Reporting Area`,
+                                    Week = `MMWR Week`,
+                                    `S. paratyphi` = `Salmonella Paratyphi infection§, Current week`,
+                                    `S. typhi` = `Salmonella Typhi infection¶, Current week`,
+                                    `Other Salmonella` = `Salmonellosis (excluding Salmonella Paratyphi infection and Salmonella Typhoid infection)**, Current week`)
+
+#Then changing all `NAs` to `0`
+na_index <- is.na(salmonella)
+salmonella[na_index] <- 0
+```
+
+
+Finally, I decided to keep only the records that belong to any of the 9 Census Bureau designated regions. This means removing all data from the individual 50 US states and 6 US territories. But first I wanted to explore if there are any typos in some of the locations.
+
+```{r}
+#First exploring how many unique values are from the `location` variable using `unique()`
+unique(salmonella$Region) %>% sort(decreasing = F)
+```
+
+As seen above there are two middle atlantic variables: `MIDDLE ATLANTIC` and `MIDDDLE ATLANTIC` so I corrected the later one.
+
+```{r}
+#Rename all `MIDDDLE ATLANTIC` observations to `MIDDLE ATLANTIC` using `mutate()` and `recode()`
+salmonella <- salmonella %>% mutate(Region = recode(Region, `MIDDDLE ATLANTIC` = "MIDDLE ATLANTIC"))
+
+#Check again if the operation worked out using the `unique()` function
+unique(salmonella$Region) %>% sort(decreasing = F)
+```
+
+The operation worked, so now I will filter only the 9 US regions. Then, checking again if the operation worked.
+
+```{r}
+#Using `filter()` to keep only the 9 Census Bureau designated regions
+salmonella <- filter(salmonella, Region %in% c("NEW ENGLAND", "MIDDLE ATLANTIC", "EAST NORTH CENTRAL", "WEST NORTH CENTRAL",
+                                                 "SOUTH ATLANTIC", "EAST SOUTH CENTRAL", "WEST SOUTH CENTRAL", "MOUNTAIN", "PACIFIC"))
+
+#Check again if the operation worked out using the `unique()` function
+unique(salmonella$Region) %>% sort(decreasing = F)
+```
+
+### Exploratory and Descriptive Analysis
+
+First, I created a dataframe `salmonella_summary` that summarizes the number of infections of each type of Salmonella by each region.
+
+```{r}
+#First I grouped the observations using `group_by()`, and then used `summarize()` with `sum()` to create the summary of infections for each type of Salmonella by each region
+salmonella_summary <- salmonella %>% group_by(Region) %>% 
+ summarize(`S. paratyphi` = sum(`S. paratyphi`),
+            `S. typhi` = sum(`S. typhi`),
+            `Other Salmonella` = sum(`Other Salmonella`))
+
+#View the dataframe
+salmonella_summary
+```
+To create a table that shows the frequency of cases by region and their percentages, I decided to transpose the data frame, creating the `salmonella_summary_transp` object.
+
+```{r}
+#Transpose data using the `data.frame()` function to create the data frame, then using `t()` to transpose column by rows
+salmonella_summary_transp <- data.frame(cbind(names(salmonella_summary), t(salmonella_summary)))
+
+#Since this function didn't properly named the columns, I manually set them using the `colnames()` function
+colnames(salmonella_summary_transp) <- c("Bacteria",
+                                         "East North Central", 
+                                         "East South Central",
+                                         "Middle Atlantic",
+                                         "Mountain",
+                                         "New England",
+                                         "Pacific",
+                                         "South Atlantic",
+                                         "West North Central",
+                                         "West South Central")
+
+#Here I also specified that the rows shouldn't be named, using the `rownames()` and then set to NULL
+rownames(salmonella_summary_transp) <- NULL
+
+#I also deleted the first row of the new data frame, since it contained the name of the columns, I did this using base R.
+salmonella_summary_transp <- salmonella_summary_transp[-1,]
+
+#View the data frame
+salmonella_summary_transp
+```
+
+As seen above, there is the problem that all the columns are character type variable, so I changed them to numeric in the following code chunk.
+
+```{r}
+#Use the `mutate_at()` function and then the as.numeric statement to change all the variables, except the first one to numeric type
+salmonella_summary_transp <- salmonella_summary_transp %>% mutate_at(c("East North Central", 
+                                         "East South Central",
+                                         "Middle Atlantic",
+                                         "Mountain",
+                                         "New England",
+                                         "Pacific",
+                                         "South Atlantic",
+                                         "West North Central",
+                                         "West South Central"), as.numeric)
+
+#Using `str()` to check if the dataframe was changed
+str(salmonella_summary_transp)
+```
+
+Finally, I created a table that summarizes the frequency and percentage of cases by each type of bacteria and by region under the `salmonella_freq` object.
+
+```{r}
+salmonella_freq <- data.frame(salmonella_summary_transp %>% 
+  group_by(Bacteria) %>% #Grouping by type of bacteria
+  summarize(`East North Central` = paste0(sum(`East North Central`), "(", #To sum all cases of salmonella from this region
+                                          round(sum(`East North Central`)/sum(salmonella_summary_transp$`East North Central`) *100,2), #To also estimate the percentage of cases for this region (The following lines of code repeat the two steps shown here)
+                                          "%)"),
+            `East South Central` = paste0(sum(`East South Central`), "(",
+                                          round(sum(`East South Central`)/sum(salmonella_summary_transp$`East South Central`) *100,2),
+                                          "%)"),
+            `Middle Atlantic` = paste0(sum(`Middle Atlantic`), "(",
+                                          round(sum(`Middle Atlantic`)/sum(salmonella_summary_transp$`Middle Atlantic`) *100,2),
+                                          "%)"),
+            `Mountain` = paste0(sum(`Mountain`), "(",
+                                          round(sum(`Mountain`)/sum(salmonella_summary_transp$`Mountain`) *100,2),
+                                          "%)"),
+            `New England` = paste0(sum(`New England`), "(",
+                                          round(sum(`New England`)/sum(salmonella_summary_transp$`New England`) *100,2),
+                                          "%)"),
+            `Pacific` = paste0(sum(`Pacific`), "(",
+                                          round(sum(`Pacific`)/sum(salmonella_summary_transp$`Pacific`) *100,2),
+                                          "%)"),
+            `South Atlantic` = paste0(sum(`South Atlantic`), "(",
+                                          round(sum(`South Atlantic`)/sum(salmonella_summary_transp$`South Atlantic`) *100,2),
+                                          "%)"),
+            `West North Central` = paste0(sum(`West North Central`), "(",
+                                          round(sum(`West North Central`)/sum(salmonella_summary_transp$`West North Central`) *100,2),
+                                          "%)"),
+            `West South Central` = paste0(sum(`West South Central`), "(",
+                                          round(sum(`West South Central`)/sum(salmonella_summary_transp$`West South Central`) *100,2),
+                                          "%)")))
+
+#View the table
+salmonella_freq
+```
+
+In this table it is observed that the majority of cases of Salmonellosis in all the regions belong to the types of Salmonella other than S. typhi or S. paratyphi.
+
+And now, to have a visual representation of how the cases of each type of Salmonella look by week, I plotted the following figures. The first figure represents the number of Salmonella paratyphi cases by week and color coded by US region
+
+```{r}
+#Using `ggplot()` and the `geom_col()` functions to plot the cases of S. paratyphi through time
+ggplot(salmonella, aes(x= Week, y= `S. paratyphi`, fill= Region))+
+  geom_col()+
+  labs(x= "Week", y= "No. Cases")+
+  scale_x_continuous(breaks = seq(1, 21, by= 1))
+```
+
+This figure represents the number of Salmonella typhi cases by week and color coded by US region
+
+```{r}
+#Using `ggplot()` and the `geom_col()` functions to plot the cases of S. typhi through time
+ggplot(salmonella, aes(x= Week, y= `S. typhi`, fill= Region))+
+  geom_col()+
+  labs(x= "Week", y= "No. Cases")+
+  scale_x_continuous(breaks = seq(1, 21, by= 1))
+```
+
+And finally, the next figure shows the number of cases of Other types of Salmonella (the majority of them) by week and color coded by US region.
+
+```{r}
+#Using `ggplot()` and the `geom_col()` functions to plot the cases of all other types of Salmonellosis through time
+ggplot(salmonella, aes(x= Week, y= `Other Salmonella`, fill= Region))+
+  geom_col()+
+  labs(x= "Week", y= "No. Cases")+
+  scale_x_continuous(breaks = seq(1, 21, by= 1))+
+  scale_y_continuous(breaks = seq(0, 200, by= 20))
+```
+
