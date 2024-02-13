@@ -1,5 +1,99 @@
 ---
 title: "Presentation Exercise"
+author: Erick Mollinedo
+date: 02-14-2024
 ---
 
-Placeholder file for the future data/results presentation exercise.
+## Data visualization
+
+For this exercise I chose the third graph from the "How Americans view Biden's response to the coronavirus crisis" article from FiveThirtyEight (<https://projects.fivethirtyeight.com/coronavirus-polls/>). The graph is a time trend on how americans were worried about they or someone beloved to getting infected with COVID-19, from February 2020 to April 2021. To recreate the graph I used the RTutor AI online tool, where after many attempts I was given a product that worked but still, I had to make some small tweaks to make the graph more alike the original one.
+
+This is the original graph from the article:
+
+\[![Caption](covid_graph.jpg)\]
+
+Packages I used for this exercise:
+
+```{r}
+library(tidyverse)
+library(scales)
+library(here)
+library(readr)
+```
+
+Loading the dataset and assign it to the `covid_poll` object:
+
+```{r}
+#Using the `read_csv()` and `here()` functions to load the dataset
+covid_poll <- read_csv(here("presentation-exercise", "data", "covid_concern_polls.csv"))
+```
+
+First I reduced the dataset by creating the `covid_infected` object that only has the records of people concerned with COVID infection using the `filter()` function and then I estimated the daily percentages of people concerned to get an infection using `mutate()`.
+
+```{r}
+# Filter the data for the 'concern-infected' subject and calculate percentages
+covid_infected <- covid_poll %>%
+  filter(subject == 'concern-infected') %>% #Filtered with the `subject` variable
+  mutate(
+    start_date = as.Date(start_date, format = "%m/%d/%Y"), #Set the `start_date` variable as a date format
+    total_responses = very + somewhat + not_very + not_at_all, #Create a variable that sums the number of people concerned with infection
+    very_percentage = very / total_responses * 100, #Estimating the percent of people concerned with infection for the variable `very', below it is done the same for the other 3 variables
+    somewhat_percentage = somewhat / total_responses * 100,
+    not_very_percentage = not_very / total_responses * 100,
+    not_at_all_percentage = not_at_all / total_responses * 100
+  ) %>%
+  select(start_date, very_percentage, somewhat_percentage, not_very_percentage, not_at_all_percentage) #Only selected the necessary variables of this dataset
+```
+
+Then I reshaped the dataset to make it easy for plotting, using the `pivot_longer()` functions and assigning to the `covid_longer` object.
+
+```{r}
+# Reshape the data for plotting
+covid_longer <- covid_infected %>%
+  pivot_longer(cols = c(very_percentage, somewhat_percentage, not_very_percentage, not_at_all_percentage),
+               names_to = "ConcernLevel", values_to = "Percentage") %>% #Using pivot longer to reshape the dataframe
+  mutate(ConcernLevel = recode(ConcernLevel, #Recoding the values before plotting
+                               'very_percentage' = 'Very',
+                               'somewhat_percentage' = 'Somewhat',
+                               'not_very_percentage' = 'Not Very',
+                               'not_at_all_percentage' = 'Not at all'))
+```
+
+And finally creating the plot using `ggplot()`. Each code chunk is detailed below.
+
+```{r}
+# Create the time trend graph
+ggplot(covid_longer, aes(x = start_date, y = Percentage, group = ConcernLevel, color = ConcernLevel)) + #Selecting the x and y variables and grouping by `ConcernLevel`
+  geom_line() + #Select a line graph
+  scale_x_date(date_breaks = "1 month", date_labels = "%m/%d", #Selecting the x-scale breaks in 1-month intervals and selecting as month/day format
+               limits = as.Date(c("2020-02-01", "2021-04-01"))) + #Selecting the start and end date limits
+  scale_y_continuous(breaks = seq(0, 100, by = 25)) + #Selecting the y-breaks in intervals of 25
+  scale_color_manual(values = c("Very" = "red", "Somewhat" = "orange", 
+                                "Not Very" = "mediumpurple1", "Not at all" = "purple")) + #Setting the colors
+  labs(
+    title = "How worried are Americans about infection?", #Writing the title
+    subtitle = paste("How concerned Americans say they are that they, someone in their family or someone else they know will", "\n", "become infected with the coronavirus") #Writing the subtitle, and using "\n" to sepparate it in two lines
+  ) +
+  theme_minimal() + #setting the theme
+  theme(
+    legend.position = "bottom", #The position of the legend for level of concern
+    plot.title = element_text(hjust = 0.5, size = 10), #Position and size of the title
+    plot.subtitle = element_text(hjust = 0.5, size = 8), #Position and size of the subtitle
+    axis.title.x = element_blank(), #Removing the x-axis label
+    axis.title.y = element_blank() #Removing the y-axis label
+  ) +
+  geom_vline(xintercept = as.Date("2020-02-29"), linetype = "dashed") + #Setting a dashed line on a specific date with text below, the following 4 lines of code are for another 4 specific lines
+  geom_vline(xintercept = as.Date("2020-05-28"), linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2020-10-02"), linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2020-11-07"), linetype = "dashed") +
+  geom_vline(xintercept = as.Date("2021-01-20"), linetype = "dashed") +
+  geom_text(aes(x = as.Date("2020-02-29"), y = 55, label = paste("First U.S.", "\n", "death reported")), angle = 0, vjust = 0, fontface = "italic", color = "black") + #Setting the text for the first dashed line, breaking it into two text parts so they fit inside the plot, also setting the angle at 0 and in italic font. (The following lines of code are for the other 4 dashed lines)
+  geom_text(aes(x = as.Date("2020-05-28"), y = 55, label = paste("U.S. deaths", "\n", "surpass 100,000")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
+  geom_text(aes(x = as.Date("2020-10-02"), y = 48, label = paste("Trump diagnosed", "\n", "with COVID-19")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
+  geom_text(aes(x = as.Date("2020-11-07"), y = 57, label = paste("Biden declared", "\n", "election winner")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
+  geom_text(aes(x = as.Date("2021-01-20"), y = 55, label = paste("Biden sworn", "\n", "into office")), angle = 0, vjust = 0, fontface = "italic", color = "black")
+```
+
+The graph is not exactly similar to the original one, but it looks good. I will try to work on more edits change the x-axis and the dashed line text and the colored lines more visually appealing.
+
+## Presentation of results
