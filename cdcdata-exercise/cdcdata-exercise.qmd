@@ -209,3 +209,130 @@ ggplot(salmonella, aes(x= Week, y= `Other Salmonella`, fill= Region))+
   scale_y_continuous(breaks = seq(0, 200, by= 20))
 ```
 
+This section contributed by MUTSA NYAMURANGA
+
+## Creating Synthetic Replicate Data 
+```{r}
+# make sure the packages are installed
+# Load required packages
+library(here)
+library(dplyr)
+library(ggplot2)
+library(skimr)
+library(gtsummary)
+```
+
+Here I set a seed so that my synthetic data will be reproducible to assess discrepencies with the original data. 
+```{r}
+set.seed(189)
+n_observations <- 189
+```
+
+### Analyzing Orginal Data Set
+
+Although I have view Erick's code and his analysis, I would like to also gain an understanding of what he looked at and how he got there. Taking a look at the data myself will help create the correct data frame for replication. 
+```{r}
+#Skim the data structure to analyze observations and variable types
+skimr::skim(salmonella)
+
+#Collect distribution of variable observations
+gtsummary::tbl_summary(salmonella, statistic = list(
+  all_continuous() ~ "{mean}/{median}/{min}/{max}/{sd}",
+  all_categorical() ~ "{n} / {N} ({p}%)"
+),)
+```
+
+```{r}
+#Distributions Within each variable
+table(salmonella$Region)
+table(salmonella$Week)
+table(salmonella$`S. paratyphi`)
+table(salmonella$`S. typhi`)
+table(salmonella$`Other Salmonella`)
+```
+
+### Synthesis
+
+Here I create the synthetic data frame based on elements of Erick's analysis
+```{r}
+# Create synthetic data frame similar to the original
+syn_salmonella <- data.frame(
+
+  Region = sample(c("NEW ENGLAND", "MIDDLE ATLANTIC", "EAST NORTH CENTRAL", "WEST NORTH CENTRAL",
+                    "SOUTH ATLANTIC", "EAST SOUTH CENTRAL", "WEST SOUTH CENTRAL", "MOUNTAIN", "PACIFIC"),
+                  n_observations, replace = TRUE),
+  Week = sample(1:21, n_observations, replace = TRUE),
+  `S. paratyphi` = sample(c(0, 1), n_observations, replace = TRUE, prob = c(0.8, 0.2)),
+  `S. typhi` = sample(c(0, 1), n_observations, replace = TRUE, prob = c(0.9, 0.1)),  
+  `Other Salmonella` = sample(c(0, 1), n_observations, replace = TRUE, prob = c(0.7, 0.3)) 
+)
+```
+
+I take a look at the data structure to make sure everything has been created correctly. 
+```{r}
+str(syn_salmonella)
+colnames(syn_salmonella)
+ncol(syn_salmonella)
+```
+### Summary Tables
+I, then, create summary tables for the data
+```{r}
+# Summary table similar to original
+syn_salmonella_summary <- syn_salmonella %>%
+  group_by(Region) %>%
+  summarize(`S..paratyphi` = sum(`S..paratyphi`, na.rm = TRUE),  # Add na.rm = TRUE if there are NA values
+            `S..typhi` = sum(`S..typhi`, na.rm = TRUE),
+            `Other.Salmonella` = sum(`Other.Salmonella`, na.rm = TRUE))
+
+# Transpose summary data frame
+syn_salmonella_summary_transp <- data.frame(t(syn_salmonella_summary[-1]))
+colnames(syn_salmonella_summary_transp) <- syn_salmonella_summary$Region
+
+# Change data types to numeric (excluding the first column)
+syn_salmonella_summary_transp[, -1] <- sapply(syn_salmonella_summary_transp[, -1], as.numeric)
+```
+
+```{r}
+# Table of frequencies and percentages
+syn_salmonella_freq <- syn_salmonella_summary_transp %>%
+  mutate(Total = rowSums(.)) %>%
+  mutate(across(everything(), ~paste0(., " (", round(. / Total * 100, 2), "%)"), .names = "{col}_Percent")) %>%
+  select(-Total) %>%
+  rbind(c("Total", colSums(syn_salmonella_summary_transp[, -1])))
+
+syn_salmonella_summary_transp
+syn_salmonella_summary
+```
+
+### Plotting similar to original
+
+Finally, I create plots similar to the plots made by Erick in his anaylsis. 
+```{r}
+# Plot for S. paratyphi cases by week and region
+ggplot(syn_salmonella, aes(x = Week, y = `S..paratyphi`, fill = Region)) +
+  geom_col() +
+  labs(x = "Week", y = "No. Cases") +
+  scale_x_continuous(breaks = seq(1, 21, by = 1))
+```
+
+```{r}
+# Plot for S. typhi cases by week and region
+ggplot(syn_salmonella, aes(x = Week, y = `S..typhi`, fill = Region)) +
+  geom_col() +
+  labs(x = "Week", y = "No. Cases") +
+  scale_x_continuous(breaks = seq(1, 21, by = 1))
+```
+
+```{r}
+# Plot for Other Salmonella cases by week and region
+ggplot(syn_salmonella, aes(x = Week, y = `Other.Salmonella`, fill = Region)) +
+  geom_col() +
+  labs(x = "Week", y = "No. Cases") +
+  scale_x_continuous(breaks = seq(1, 21, by = 1)) +
+  scale_y_continuous(breaks = seq(0, 200, by = 20))
+```
+
+## Data Comparison
+
+I believe that the data is quite similar in terms of volume, but the differences come in distribution throughout the week. The similarities that the synthetic data can replicate are not going to be on a week to week bases unless specified, but in that case, we would essentially be copy and pasting the original data. 
+
