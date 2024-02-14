@@ -94,6 +94,50 @@ ggplot(covid_longer, aes(x = start_date, y = Percentage, group = ConcernLevel, c
   geom_text(aes(x = as.Date("2021-01-20"), y = 55, label = paste("Biden sworn", "\n", "into office")), angle = 0, vjust = 0, fontface = "italic", color = "black")
 ```
 
-The graph is not exactly similar to the original one, but it looks good. I will try to work on more edits change the x-axis and the dashed line text and the colored lines more visually appealing.
+The graph is not exactly similar to the original one, but it looks good. I will try to work on more edits change the x-axis and the dashed line text and the colored lines more visually appealing (Maybe plotting the averages?).
 
 ## Presentation of results
+
+To create a table I used the same dataset as above.
+
+I loaded an extra package for this part:
+
+```{r}
+library(gt)
+```
+
+First I created a new object called `covid_summary`, that will be used to create the table.
+
+```{r}
+# Create the dataframe used as base for the table
+covid_summary <- covid_infected %>%
+  mutate(month = floor_date(as.Date(start_date, format = "%Y-%m-%d"), "month")) %>% #Make the date in consistent format and mutate the `start_date` variable so it's named as `month`
+  group_by(month) %>% #Group by month of the year
+  summarise( #Create the average percent by month, and round it to two decimal places (applies to the following 4 lines of code)
+    avg_very_percent = round(mean(very_percentage, na.rm = TRUE), 2),
+    avg_somewhat_percent = round(mean(somewhat_percentage, na.rm = TRUE), 2),
+    avg_not_very_percent = round(mean(not_very_percentage, na.rm = TRUE), 2),
+    avg_not_at_all_percent = round(mean(not_at_all_percentage, na.rm = TRUE), 2)
+  ) %>%
+  mutate(across(starts_with("avg_"), ~ as.numeric(format(., nsmall = 2)))) %>% #Change variables to numeric
+  rename(Month = "month", #Rename the variables to be more legible
+         Very = "avg_very_percent",
+         Somewhat = "avg_somewhat_percent",
+         `Not very` = "avg_not_very_percent",
+         `Not at all` = "avg_not_at_all_percent")
+```
+
+And now creating the table using the `gt` package, and apply some style edits.
+
+```{r}
+#Create a professional table using the `gt` package.
+covid_summary %>% gt() %>% #Create the base table
+   tab_header(
+    title = "How worried are Americans about COVID-19 infection?") %>% #Attach a title to the table
+  tab_spanner(label = "Concern Level", #Create a subtitle or header for columns 2 to 5
+    columns = vars(Very, Somewhat, `Not very`, `Not at all`)) %>% #Select the columns or variables
+  tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels(columns=c("Month", "Very", "Somewhat", "Not very", "Not at all"))) %>% #Setting the column labels in bold
+  tab_style(style = cell_text(weight = "bold"), locations = cells_title()) #Setting the title in bold
+```
+
+The product is a simple table, but we can see more clear that overall, the majority of people were very or somewhat concerned of a COVID-19 infection from February 2020 to April 2021.
