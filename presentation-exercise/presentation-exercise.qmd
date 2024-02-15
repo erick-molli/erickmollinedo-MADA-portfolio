@@ -19,82 +19,86 @@ library(tidyverse)
 library(scales)
 library(here)
 library(readr)
+library(lubridate)
 ```
 
 Loading the dataset and assign it to the `covid_poll` object:
 
 ```{r}
 #Using the `read_csv()` and `here()` functions to load the dataset
-covid_poll <- read_csv(here("presentation-exercise", "data", "covid_concern_polls.csv"))
+covid_poll <- read_csv(here("presentation-exercise", "data", "covid_concern_toplines.csv"))
 ```
 
-First I reduced the dataset by creating the `covid_infected` object that only has the records of people concerned with COVID infection using the `filter()` function and then I estimated the daily percentages of people concerned to get an infection using `mutate()`.
+First I transformed the `modeldate` variable to date type using the `lubridate` package. I assigned it to the `covid_infect` dataframe. I also filtered only the responses needed for the graph, from the `subject` variable.
 
 ```{r}
-# Filter the data for the 'concern-infected' subject and calculate percentages
-covid_infected <- covid_poll %>%
-  filter(subject == 'concern-infected') %>% #Filtered with the `subject` variable
-  mutate(
-    start_date = as.Date(start_date, format = "%m/%d/%Y"), #Set the `start_date` variable as a date format
-    total_responses = very + somewhat + not_very + not_at_all, #Create a variable that sums the number of people concerned with infection
-    very_percentage = very / total_responses * 100, #Estimating the percent of people concerned with infection for the variable `very', below it is done the same for the other 3 variables
-    somewhat_percentage = somewhat / total_responses * 100,
-    not_very_percentage = not_very / total_responses * 100,
-    not_at_all_percentage = not_at_all / total_responses * 100
-  ) %>%
-  select(start_date, very_percentage, somewhat_percentage, not_very_percentage, not_at_all_percentage) #Only selected the necessary variables of this dataset
+# Transform 'modeldate' to date type and filter the data
+covid_infect <- covid_poll %>%
+  mutate(modeldate = mdy(modeldate)) %>% #Mutate the `modeldate` variable to month/day/year
+  filter(modeldate < as.Date("2021-04-22") & subject == 'concern-infected') #Transform the `modeldate` variable as date type and filter the 'concern-infected' value from the `subject` variable.
 ```
 
-Then I reshaped the dataset to make it easy for plotting, using the `pivot_longer()` functions and assigning to the `covid_longer` object.
+Now I decided to produce weekly averages, instead of using the daily datapoints, I assigned this to the `covid_weekly` dataframe
 
 ```{r}
-# Reshape the data for plotting
-covid_longer <- covid_infected %>%
-  pivot_longer(cols = c(very_percentage, somewhat_percentage, not_very_percentage, not_at_all_percentage),
-               names_to = "ConcernLevel", values_to = "Percentage") %>% #Using pivot longer to reshape the dataframe
-  mutate(ConcernLevel = recode(ConcernLevel, #Recoding the values before plotting
-                               'very_percentage' = 'Very',
-                               'somewhat_percentage' = 'Somewhat',
-                               'not_very_percentage' = 'Not Very',
-                               'not_at_all_percentage' = 'Not at all'))
+# Calculate weekly averages of the estimates
+covid_weekly <- covid_infect %>%
+  group_by(week = floor_date(modeldate, "week")) %>% #Group by weeks
+  summarize( #Produce the summaries for each response variable (4 code lines below)
+    very_estimate = mean(very_estimate, na.rm = TRUE),
+    somewhat_estimate = mean(somewhat_estimate, na.rm = TRUE),
+    not_very_estimate = mean(not_very_estimate, na.rm = TRUE),
+    not_at_all_estimate = mean(not_at_all_estimate, na.rm = TRUE),
+    .groups = 'drop')
+```
+
+Then I created the `covid_longer` dataframe using the `pivot_longer()` function, so the data is more easy to be used for the final graph.
+
+```{r}
+# Pivot data to long format for plotting
+covid_longer <- covid_weekly %>%
+  pivot_longer(cols = c(very_estimate, somewhat_estimate, not_very_estimate, not_at_all_estimate), #Use `pivot_longer()` to mutate the dataframe
+               names_to = "estimate_type",
+               values_to = "estimate") %>%
+  mutate(estimate_label = recode(estimate_type, #Recode the values of the response variables to characters more legible (4 code lines below)
+                                 "very_estimate" = "Very",
+                                 "somewhat_estimate" = "Somewhat",
+                                 "not_very_estimate" = "Not Very",
+                                 "not_at_all_estimate" = "Not at all"))
 ```
 
 And finally creating the plot using `ggplot()`. Each code chunk is detailed below.
 
 ```{r}
-# Create the time trend graph
-ggplot(covid_longer, aes(x = start_date, y = Percentage, group = ConcernLevel, color = ConcernLevel)) + #Selecting the x and y variables and grouping by `ConcernLevel`
+#Creating the time trend graph
+ggplot(covid_longer, aes(x = week, y = estimate, group = estimate_label, color = estimate_label)) + #Selecting the x and y variables and grouping by `estimate_label`
   geom_line() + #Select a line graph
   scale_x_date(date_breaks = "1 month", date_labels = "%m/%d", #Selecting the x-scale breaks in 1-month intervals and selecting as month/day format
                limits = as.Date(c("2020-02-01", "2021-04-01"))) + #Selecting the start and end date limits
-  scale_y_continuous(breaks = seq(0, 100, by = 25)) + #Selecting the y-breaks in intervals of 25
+  scale_y_continuous(limits = c(0, 75), breaks = c(0, 25, 50)) + #Selecting the y-axis limits, and set the breaks
   scale_color_manual(values = c("Very" = "red", "Somewhat" = "orange", 
                                 "Not Very" = "mediumpurple1", "Not at all" = "purple")) + #Setting the colors
-  labs(
-    title = "How worried are Americans about infection?", #Writing the title
-    subtitle = paste("How concerned Americans say they are that they, someone in their family or someone else they know will", "\n", "become infected with the coronavirus") #Writing the subtitle, and using "\n" to sepparate it in two lines
-  ) +
+  labs(title = "How worried are Americans about infection?", #Writing the title
+    subtitle = paste("How concerned Americans say they are that they, someone in their family or someone else they know will", "\n", "become infected with the coronavirus"))+ #Writing the subtitle, and using "\n" to sepparate it in two lines
   theme_minimal() + #setting the theme
-  theme(
-    legend.position = "bottom", #The position of the legend for level of concern
+  theme(legend.position = "bottom", #The position of the legend for level of concern
     plot.title = element_text(hjust = 0.5, size = 10), #Position and size of the title
     plot.subtitle = element_text(hjust = 0.5, size = 8), #Position and size of the subtitle
     axis.title.x = element_blank(), #Removing the x-axis label
-    axis.title.y = element_blank() #Removing the y-axis label
-  ) +
+    axis.title.y = element_blank())+ #Removing the y-axis label
   geom_vline(xintercept = as.Date("2020-02-29"), linetype = "dashed") + #Setting a dashed line on a specific date with text below, the following 4 lines of code are for another 4 specific lines
   geom_vline(xintercept = as.Date("2020-05-28"), linetype = "dashed") +
   geom_vline(xintercept = as.Date("2020-10-02"), linetype = "dashed") +
   geom_vline(xintercept = as.Date("2020-11-07"), linetype = "dashed") +
   geom_vline(xintercept = as.Date("2021-01-20"), linetype = "dashed") +
-  geom_text(aes(x = as.Date("2020-02-29"), y = 55, label = paste("First U.S.", "\n", "death reported")), angle = 0, vjust = 0, fontface = "italic", color = "black") + #Setting the text for the first dashed line, breaking it into two text parts so they fit inside the plot, also setting the angle at 0 and in italic font. (The following lines of code are for the other 4 dashed lines)
-  geom_text(aes(x = as.Date("2020-05-28"), y = 55, label = paste("U.S. deaths", "\n", "surpass 100,000")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
-  geom_text(aes(x = as.Date("2020-10-02"), y = 48, label = paste("Trump diagnosed", "\n", "with COVID-19")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
-  geom_text(aes(x = as.Date("2020-11-07"), y = 57, label = paste("Biden declared", "\n", "election winner")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
-  geom_text(aes(x = as.Date("2021-01-20"), y = 55, label = paste("Biden sworn", "\n", "into office")), angle = 0, vjust = 0, fontface = "italic", color = "black")
+  geom_text(aes(x = as.Date("2020-02-29"), y = 50, label = paste("First U.S.", "\n", "death reported")), angle = 0, vjust = 0, fontface = "italic", color = "black") + #Setting the text for the first dashed line, breaking it into two text parts so they fit inside the plot, also setting the angle at 0 and in italic font. (The following lines of code are for the other 4 texts)
+  geom_text(aes(x = as.Date("2020-05-28"), y = 50, label = paste("U.S. deaths", "\n", "surpass 100,000")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
+  geom_text(aes(x = as.Date("2020-09-02"), y = 60, label = paste("Trump diagnosed", "\n", "with COVID-19")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
+  geom_text(aes(x = as.Date("2020-11-07"), y = 48, label = paste("Biden declared", "\n", "election winner")), angle = 0, vjust = 0, fontface = "italic", color = "black") +
+  geom_text(aes(x = as.Date("2021-01-20"), y = 50, label = paste("Biden sworn", "\n", "into office")), angle = 0, vjust = 0, fontface = "italic", color = "black")
 ```
 
-The graph is not exactly similar to the original one, but it looks good. I will try to work on more edits change the x-axis and the dashed line text and the colored lines more visually appealing (Maybe plotting the averages?).
+Note: The code has been updated to reflect changes from suggestions from others.
 
 ## Presentation of results
 
@@ -110,21 +114,21 @@ First I created a new object called `covid_summary`, that will be used to create
 
 ```{r}
 # Create the dataframe used as base for the table
-covid_summary <- covid_infected %>%
-  mutate(month = floor_date(as.Date(start_date, format = "%Y-%m-%d"), "month")) %>% #Make the date in consistent format and mutate the `start_date` variable so it's named as `month`
+covid_summary <- covid_infect %>%
+  mutate(month = floor_date(as.Date(modeldate, format = "%Y-%m-%d"), "month")) %>% #Make the date in consistent format and mutate the `start_date` variable so it's named as `month`
   group_by(month) %>% #Group by month of the year
   summarise( #Create the average percent by month, and round it to two decimal places (applies to the following 4 lines of code)
-    avg_very_percent = round(mean(very_percentage, na.rm = TRUE), 2),
-    avg_somewhat_percent = round(mean(somewhat_percentage, na.rm = TRUE), 2),
-    avg_not_very_percent = round(mean(not_very_percentage, na.rm = TRUE), 2),
-    avg_not_at_all_percent = round(mean(not_at_all_percentage, na.rm = TRUE), 2)
+    avg_very_estimate = round(mean(very_estimate, na.rm = TRUE), 2),
+    avg_somewhat_estimate = round(mean(somewhat_estimate, na.rm = TRUE), 2),
+    avg_not_very_estimate = round(mean(not_very_estimate, na.rm = TRUE), 2),
+    avg_not_at_all_estimate = round(mean(not_at_all_estimate, na.rm = TRUE), 2)
   ) %>%
   mutate(across(starts_with("avg_"), ~ as.numeric(format(., nsmall = 2)))) %>% #Change variables to numeric
   rename(Month = "month", #Rename the variables to be more legible
-         Very = "avg_very_percent",
-         Somewhat = "avg_somewhat_percent",
-         `Not very` = "avg_not_very_percent",
-         `Not at all` = "avg_not_at_all_percent")
+         Very = "avg_very_estimate",
+         Somewhat = "avg_somewhat_estimate",
+         `Not very` = "avg_not_very_estimate",
+         `Not at all` = "avg_not_at_all_estimate")
 ```
 
 And now creating the table using the `gt` package, and apply some style edits.
