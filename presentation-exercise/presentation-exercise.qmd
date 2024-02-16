@@ -98,7 +98,9 @@ ggplot(covid_longer, aes(x = week, y = estimate, group = estimate_label, color =
   geom_text(aes(x = as.Date("2021-01-20"), y = 50, label = paste("Biden sworn", "\n", "into office")), angle = 0, vjust = 0, fontface = "italic", color = "black")
 ```
 
-Note: The code has been updated to reflect changes from suggestions from others.
+Note: The code has been updated to reflect changes from suggestions from others. Also, the original graph is interactive, which in my case I did not capture. Here is the original graph again for comparison:
+
+\[![Caption](covid_graph.jpg)\]
 
 ## Presentation of results
 
@@ -138,7 +140,7 @@ And now creating the table using the `gt` package, and apply some style edits.
 covid_summary %>% gt() %>% #Create the base table
    tab_header(
     title = "How worried are Americans about COVID-19 infection?") %>% #Attach a title to the table
-  tab_spanner(label = "Concern Level", #Create a subtitle or header for columns 2 to 5
+  tab_spanner(label = "Concern Percentage", #Create a subtitle or header for columns 2 to 5
     columns = vars(Very, Somewhat, `Not very`, `Not at all`)) %>% #Select the columns or variables
   tab_style(style = cell_text(weight = "bold"), locations = cells_column_labels(columns=c("Month", "Very", "Somewhat", "Not very", "Not at all"))) %>% #Setting the column labels in bold
   tab_style(style = cell_text(weight = "bold"), locations = cells_title()) #Setting the title in bold
