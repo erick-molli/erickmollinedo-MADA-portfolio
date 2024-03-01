@@ -1,0 +1,323 @@
+---
+title: "Fitting exercise"
+author: Erick E. Mollinedo
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+format: html
+editor: visual
+---
+
+## Mavoglurant modeling Exercise
+
+These are the packages I used for this exercise
+
+```{r}
+library(here)
+library(readr)
+library(tidyverse)
+library(tidymodels)
+library(gtsummary)
+library(GGally)
+```
+
+Loading the dataset, assigned it to the `mavoglurant` dataframe.
+
+```{r}
+mavoglurant <- read_csv(here("fitting-exercise", "Mavoglurant_A2121_nmpk.csv"))
+```
+
+### Data Cleaning
+
+First, I created a plot showing the concentration of Mavoglurant `DV` over `TIME`, by `DOSE`. In the first attempt, the dose was plotted as a numeric variable so I mutated `DOSE` to be a categorical variable.
+
+```{r}
+#Make `DOSE` a categorical variable using as.factor().
+mavoglurant <- mavoglurant %>%
+  mutate(DOSE = as.factor(DOSE))
+
+#Create the plot of concentration by time, categorized by dose using ggplot().
+ggplot(mavoglurant, aes(x = TIME, y = DV, group= ID)) +
+  geom_line() + #Do a line plot
+  facet_wrap(~ DOSE) + #Group by DOSE
+  labs(x = "Time", y = "Mavoglurant concentration", color = "Dose")
+```
+
+Now, keeping just one of the observations for individuals that have two `OCC` observations.
+
+```{r}
+mavoglurant <- mavoglurant %>% filter(OCC == 1)
+```
+
+Now, removing observations where `TIME` is equal to 0 and create a new dataframe `mavoglurant_sum` where it summarizes the concentrations from `DV` by each subject. Then, I created the `mavoglurant_zero` dataframe that contains only the observations where `TIME` is equal to 0. An finally I joined both new dataframes into the `mavoglurant_new` df.
+
+```{r}
+# Exclude observations where 'TIME' = 0 and then compute the sum of 'DV' for each subject or 'ID', to create the `mavoglurant_sum` dataframe.
+mavoglurant_sum <- mavoglurant %>%
+  filter(TIME != 0) %>% #Remove observations where time= 0
+  group_by(ID) %>% #Group by subject
+  summarize(Y = sum(DV)) #The sum variable is called `Y`
+
+#Create a dataframe with observations where TIME= 0.
+mavoglurant_zero <- mavoglurant %>% 
+  filter(TIME == 0) %>% 
+  group_by(ID)
+
+#Join the previous dataframes using left_join()
+mavoglurant_new <- inner_join(mavoglurant_sum, mavoglurant_zero, by = "ID")
+```
+
+Finally, I filtered out unnecessary variables for this exercise and `RACE`, and `SEX` were converted to factor type variables.
+
+```{r}
+#Mutate SEX and RACE to factory type variables and then only keep Y, DOSE, AGE, SEX, RACE, WT and HT.
+mavoglurant_new <- mavoglurant_new %>% 
+  mutate(RACE = as.factor(RACE), SEX = as.factor(SEX)) %>% 
+  select(c(Y, DOSE, AGE, SEX, RACE, WT, HT))
+
+#Check the structure of the new dataframe
+str(mavoglurant_new)
+```
+
+### Exploratory Data Analysis
+
+The following plots and tables summarize the data observed from the `mavoglurant_new` dataframe.
+
+First, a Boxplot that shows the dependent variable (Y) across the three different doses.
+
+```{r}
+#Using ggplot() to create a boxplot of the predicted variable Y and the DOSE
+ggplot(mavoglurant_new, aes(x= DOSE, y= Y))+
+  geom_boxplot(fill= "aquamarine3")+
+  theme_classic()+
+  labs(x= "Dose", y= "Mavoglurant concentration")
+```
+
+Based on the previous plot, it can be observed that at higher dose, the concentration of mavoglurant (predicted variable) increases. It is also seen that the range of concentrations is higher at the higher dose (50).
+
+Now some plots that show the distribution of the dependent variable (Y) and the numeric independent variables `AGE`, `WT` and `HT`.
+
+```{r}
+#Histogram of the dependent variable (Y)
+ggplot(mavoglurant_new, aes(x= Y))+
+  geom_histogram(fill= "aquamarine3", color= "red")+
+  labs(x= "Mavoglurant concentration")
+
+#Histogram of AGE
+ggplot(mavoglurant_new, aes(x= AGE))+
+  geom_histogram(fill= "darkgoldenrod1", color= "red")+
+  labs(x= "Age")
+
+#Histogram of WT
+ggplot(mavoglurant_new, aes(x= WT))+
+  geom_histogram(fill= "darkgoldenrod1", color= "red")+
+  labs(x= "Weight")
+
+#Histogram of HT
+ggplot(mavoglurant_new, aes(x= HT))+
+  geom_histogram(fill= "darkgoldenrod1", color= "red")+
+  labs(x= "Height")
+```
+
+In the previous plots in can be seen that the dependent (Y) variable and the Weight, follow a normal distribution. Height is observed that is skewed to the right, so this variable could not be following a normal distribution. On the other hand, it is observed that Age follows a bi-modal distribution. This is providing an insight about maybe first applying a regression model to this dataset.
+
+The following table summarizes the previous variables, categorized by SEX (1 or 2). Here, it is shown the mean (sd), median (IQR) and the range.
+
+```{r}
+#Creating a summary table using the tbl_summary() function from `gtsummary`
+sumtable <- mavoglurant_new %>% select(Y, AGE, HT, WT, SEX) %>% 
+  tbl_summary(by= SEX, 
+              type = all_continuous() ~ "continuous2",
+              statistic = all_continuous() ~ c("{mean} ({sd})", "{median} ({p25}, {p75})", "{min}, {max}")) %>% 
+  bold_labels()
+
+#Visualize the table
+sumtable
+```
+
+And here, showing barplots for the categorical variables `SEX` and `RACE`.
+
+```{r}
+#Creating a bar plot that shows the counts for each race category by sex.
+ggplot(mavoglurant_new, aes(x= RACE, fill= SEX))+
+  geom_bar(position = "dodge")+
+  theme_classic()+
+  labs(x= "Race")
+```
+
+It is observed on the previous plot that there are more subjects of sex `1`, than `2` for the 1, 2 and 88 race categories. Meanwhile for the race category `7`, it seems that there is the same amount of subjects by sex category. It is a shame that the correct labels for these categories are not known for sure.
+
+And finally, exploring correlations between all the variables, visualizing by a plot:
+
+```{r}
+#Creating a correlation plot using the ggpairs() function from the GGally package.
+ggpairs(mavoglurant_new, columns = c(1, 3, 6, 7), progress = F)
+```
+
+Based on this plot it is observed that the highest correlation is between the variables Height and Weight (0.6), and the linear plots in the middle confirm the distribution of each one of the variables.
+
+### Model Fitting
+
+#### Linear Regression Models
+
+First, I fitted a linear model using the continuous outcome (Y) and `DOSE` as the predictor.
+
+```{r}
+# Define the model specification for linear regression
+linear_model <- linear_reg() %>%
+  set_engine("lm") %>% #Specify the linear model to fit the model
+  set_mode("regression") #Setting the mode as a regression model
+
+# Define the formula
+formula1 <- Y ~ DOSE
+
+# Fit the model
+lm_simple <- linear_model %>%
+  fit(formula1, data = mavoglurant_new) #Calling the formula and the dataframe to compute the linear model
+
+# Output the model summary
+summary(lm_simple$fit)
+```
+
+Based on the model it can be infered that the outcome increases by around 681.24 units with the dose 37.5 and increases by 1456.20 with the dose 50, all compared with the dose 25. It is also observed that the differences are statistically significant, given the p-values are less than 0.001.
+
+Now, fitting a linear model using the continuous outcome (Y) and using the rest of the variables as predictors.
+
+```{r}
+#The model specification has already been set in the previous code chunk, so there is no need to set it again.
+
+# Define the formula
+formula2 <- Y ~ AGE + WT + HT + DOSE + SEX + RACE
+
+# Fit the model
+lm_multi <- linear_model %>%
+  fit(formula2, data = mavoglurant_new)
+
+# Output the model summary
+summary(lm_multi$fit)
+```
+
+For the interpretation of this model I will focus only on the statistically significant predictors (p-value \< 0.001). Besides dose 37.5 with an increase of the outcome by a factor of \~664 and dose 50 with an increase by a factor of \~1500, Weight is also another variable associated with a decrease of the outcome by a factor of \~23.
+
+In summary, it can be observed that the coefficients slightly changed between both models, however the second model seems a better fit. To evaluate which model is best, I computed the root mean square error (RMSE) and R-squared as metrics. First for the linear model using one predictor, and then using multiple predictors.
+
+```{r}
+#ONE VARIABLE AS PREDICTOR
+#Create a prediction from the dataframe
+lmsimple_pred <- predict(lm_simple, new_data = mavoglurant_new %>% select(-Y))
+
+#Match predicted with observed
+lmsimple_pred <- bind_cols(lmsimple_pred, mavoglurant_new %>% select(Y))
+
+#Estimate the metrics
+lmsimple_metrics <- metric_set(rmse, rsq)
+lmsimple_metrics(lmsimple_pred, truth = Y, estimate = .pred)
+
+#MULTIPLE VARIABLES AS PREDICTORS
+#Create a prediction from the dataframe
+lmmulti_pred <- predict(lm_multi, new_data = mavoglurant_new %>% select(-Y))
+
+#Match predicted with observed
+lmmulti_pred <- bind_cols(lmmulti_pred, mavoglurant_new %>% select(Y))
+
+#Estimate the metrics
+lmmulti_metrics <- metric_set(rmse, rsq)
+lmmulti_metrics(lmmulti_pred, truth = Y, estimate = .pred)
+```
+
+We can observe that the RMSE is lower (590.3) in the model that inputs all the variables as predictors compared to the linear model that uses Dose as a predictor (RMSE= 666.3). We also observe that the R^2^ is slightly higher in the second model (0.62) compared to the first model (0.52). In this case we can conclude that the second model (linear model with multiple predictors) is a better fit to this dataset.
+
+#### Logistic Models
+
+Now, I fitted a logistic model to the outcome `SEX`, and using `DOSE` as a predictor. I also evaluated the Accuracy and ROC-AUC of this model in the following steps.
+
+```{r}
+# Define the model specification
+logistic_spec <- logistic_reg() %>%  #Defining as logistic
+  set_engine("glm") %>% #...From the GLM family
+  set_mode("classification") #Classification, since it involves categorical variables
+
+# Create the recipe
+recipe <- recipe(SEX ~ DOSE, data = mavoglurant_new) %>% 
+  step_dummy(all_nominal(), -all_outcomes())
+
+# Split the data into training and testing sets
+set.seed(123) #For reproducibility
+data_split <- initial_split(mavoglurant_new, prop = 0.75)
+train_data <- training(data_split) #Create a training data to apply the model
+test_data <- testing(data_split) #Create a test data to apply the model evaluation
+
+# Fit the model
+logistic_fit <- workflow() %>%
+  add_recipe(recipe) %>%
+  add_model(logistic_spec) %>%
+  fit(data = train_data)
+
+# Make predictions on the test set to determine the ROC-AUC of the model
+predictions <- predict(logistic_fit, test_data, type = "prob")
+
+#Make predictions on the test set to determine the Accuracy of the model
+predictions2 <- logistic_fit %>% predict(new_data = test_data)
+
+# Bind the predictions to the testing set
+results <- bind_cols(test_data, predictions) #ROC-AUC
+results2 <- bind_cols(test_data, predictions2) #Accuracy
+
+# Calculate ROC-AUC
+roc_auc <- roc_auc(results, truth = SEX, .pred_1)
+
+# Calculate Accuracy
+accuracy <- accuracy(results2, truth = SEX, estimate = .pred_class)
+
+# Output the model and the metrics
+log1 <- glm(formula = SEX ~ DOSE, family = binomial(link = "logit"), 
+    data = train_data)
+summary(log1)
+list(Accuracy = accuracy, ROC_AUC = roc_auc)
+```
+
+And finally, fitting a logistic model to the outcome `SEX`, using all of the variables as predictors. I also computed the ROC-AUC and Accuracy of this model.
+
+```{r}
+# The model has been defined before 'logistic_spec', so there is no need to define it again.
+
+# Create the recipe of this model
+recipe2 <- recipe(SEX ~ Y + AGE + WT + HT + DOSE + RACE, data = mavoglurant_new) %>% 
+  step_dummy(all_nominal(), -all_outcomes()) %>%
+  step_zv(all_predictors()) %>%
+  step_normalize(all_predictors())
+
+# Split the data into training and testing sets
+set.seed(123) #For reproducibility
+data_split2 <- initial_split(mavoglurant_new, prop = 0.75)
+train_data2 <- training(data_split2) #Create a training data to apply the model
+test_data2 <- testing(data_split2) #Create a test data to apply the model evaluation
+
+# Fit the model
+logistic_fit2 <- workflow() %>%
+  add_recipe(recipe2) %>%
+  add_model(logistic_spec) %>%
+  fit(data = train_data)
+
+# Make predictions on the test set to determine the ROC-AUC of the model
+predictions_auc <- predict(logistic_fit2, test_data2, type = "prob")
+
+#Make predictions on the test set to determine the Accuracy of the model
+predictions_acc <- logistic_fit %>% predict(new_data = test_data2)
+
+# Bind the predictions to the testing set
+results_auc2 <- bind_cols(test_data2, predictions_auc) #ROC-AUC
+results_acc2 <- bind_cols(test_data2, predictions_acc) #Accuracy
+
+# Calculate ROC-AUC
+roc_auc2 <- roc_auc(results_auc2, truth = SEX, .pred_1)
+
+# Calculate Accuracy
+accuracy2 <- accuracy(results_acc2, truth = SEX, estimate = .pred_class)
+
+# Output the metrics using list()
+log2 <- glm(formula = SEX ~ Y + AGE + WT + HT + DOSE + RACE, family = binomial(link = "logit"), 
+    data = train_data2)
+summary(log2)
+list(Accuracy = accuracy2, ROC_AUC = roc_auc2)
+```
+
+Based on the previous logistic models, it is observed that appears there is no association between the dose of mavoglurant and sex. However, when observing the second logistic model, it appears there is a statistically significant association between height and sex (p-value \< 0.05). While looking at the accuracy from both models, we can see that both have the same accuracy (93%), however, the ROC-AUC value is pretty low for the model that uses only Dose as a predictor (0.39), meanwhile, the model that uses dose and all the other variables as predictors has a better value (0.96), which reflects better sensitivity and specificity.
