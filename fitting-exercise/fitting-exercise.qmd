@@ -6,7 +6,7 @@ format: html
 editor: visual
 ---
 
-## Mavoglurant modeling Exercise
+## Mavoglurant modeling Exercise (Week 8)
 
 These are the packages I used for this exercise
 
@@ -177,7 +177,7 @@ lm_simple <- linear_model %>%
 summary(lm_simple$fit)
 ```
 
-Based on the model it can be infered that the outcome increases by around 681.24 units with the dose 37.5 and increases by 1456.20 with the dose 50, all compared with the dose 25. It is also observed that the differences are statistically significant, given the p-values are less than 0.001.
+Based on the model it can be inferred that the outcome increases by around 681.24 units with the dose 37.5 and increases by 1456.20 with the dose 50, all compared with the dose 25. It is also observed that the differences are statistically significant, given the p-values are less than 0.001.
 
 Now, fitting a linear model using the continuous outcome (Y) and using the rest of the variables as predictors.
 
@@ -321,3 +321,175 @@ list(Accuracy = accuracy2, ROC_AUC = roc_auc2)
 ```
 
 Based on the previous logistic models, it is observed that appears there is no association between the dose of mavoglurant and sex. However, when observing the second logistic model, it appears there is a statistically significant association between height and sex (p-value \< 0.05). While looking at the accuracy from both models, we can see that both have the same accuracy (93%), however, the ROC-AUC value is pretty low for the model that uses only Dose as a predictor (0.39), meanwhile, the model that uses dose and all the other variables as predictors has a better value (0.96), which reflects better sensitivity and specificity.
+
+## Mavoglurant modeling Exercise continuation (Week 10)
+
+First, naming the seed for reproducibility
+
+```{r}
+rngseed = 1234
+set.seed(rngseed)
+```
+
+Remove the `RACE` variable from the `mavoglurant_new` dataframe.
+
+```{r}
+#Select all other variables, except `RACE`
+mavoglurant_new <- mavoglurant_new %>% select(-RACE)
+```
+
+Split the data randomly to a 75% train and 25% test data.
+
+```{r}
+#Let the data split be 75-25% or 3/4
+data_split3 <- initial_split(mavoglurant_new, prop = 0.75)
+
+#Create the train and test data frames
+train_data3 <- training(data_split3)
+test_data3 <- testing(data_split3)
+```
+
+### Model performance assessment 1
+
+Now, fitting a linear regression model that predicts the outcome `Y` based on `DOSE` alone. Then, making predictions to compare against the observed values and then computing the RMSE to evaluate.
+
+```{r}
+#Define the model specification for linear regression
+lm_dose <- linear_reg() %>%
+  set_engine("lm") %>% #Specify the linear model to fit the model
+  set_mode("regression") %>% #Setting the mode as a regression model
+  fit(Y ~ DOSE, data = train_data3)
+
+#Tidy the results
+tidy(lm_dose)
+
+#Create a prediction from the dataframe for the `DOSE` model
+lmdose_pred <- predict(lm_dose, new_data = train_data3)
+
+#Match predicted with observed values
+lmdose_pred <- bind_cols(lmdose_pred, train_data3)
+
+#Estimate the metrics for the `DOSE` model
+lmdose_metric <- metric_set(rmse) #Set the function to estimate RMSE
+lmdose_metric(lmdose_pred, truth = Y, estimate = .pred) #Compute the RMSE
+```
+
+Computing another linear regression model that predicts `Y` using the other variables as predictors. I also computed the predicted vs observed values to compute the RMSE of this model.
+
+```{r}
+#Define the model specification for linear regression
+lm_all <- linear_reg() %>%
+  set_engine("lm") %>% #Specify the linear model to fit the model
+  set_mode("regression") %>% #Setting the mode as a regression model
+  fit(Y ~ ., data = train_data3)
+
+#Tidy the results
+tidy(lm_all)
+
+#Create a prediction from the dataframe of the model with all the other predictors
+lmall_pred <- predict(lm_all, new_data = train_data3)
+
+#Match predicted with observed
+lmall_pred <- bind_cols(lmall_pred, train_data3)
+
+#Estimate the metrics for the model with all the variables as predictors
+lmall_metric <- metric_set(rmse) #Set the function
+lmall_metric(lmall_pred, truth = Y, estimate = .pred) #Compute the RMSE
+```
+
+Now I created a null model and computed the RMSE.
+
+```{r}
+#Run the null model
+lm_null <- null_model(mode = "regression") %>% 
+    set_engine("parsnip") %>%
+    fit(Y ~ 1, data = train_data3)
+
+#Compute the RMSE and other estimates
+null_metric <- lm_null %>% 
+  predict(train_data3) %>% 
+  bind_cols(train_data3) %>% 
+  metrics(truth = Y, estimate = .pred)
+
+#Print the RMSE (Note: This includes also the R-squared and MAE but I am only interested in the RMSE)
+null_metric
+```
+
+In summary, according to the RMSE parameters, the model that includes all the variables as predictors performed better (RMSE= 627), compared to the model using only `DOSE` as a predictor (RMSE= 702) and the null model (RMSE= 948) as a reference.
+
+### Model performance assessment 2
+
+Now, evaluating both models using a 10-fold cross-validation. First, by the model that predicts `Y` only using `DOSE`.
+
+```{r}
+#Set the seed for reproducibility
+set.seed(rngseed)
+
+#Set the cross-validation folds as 10
+folds <- vfold_cv(train_data3, v= 10)
+
+#Set the model specification, for linear regression
+linear_mod <- linear_reg() %>% set_engine("lm")
+
+#Set the workflow
+linear_wf <- workflow() %>% add_model(linear_mod) %>% add_formula(Y ~ DOSE)
+
+#Do the resamples
+dose_resample <- fit_resamples(linear_wf, resamples = folds)
+
+#Extract the metric
+collect_metrics(dose_resample)
+```
+
+Now, doing the cross-validation for the model that predicts `Y` using all the other variables as predictors.
+
+```{r}
+#Set the seed for reproducibility
+set.seed(rngseed)
+
+#Set the workflow
+linear_all_wf <- workflow() %>% add_model(linear_mod) %>% add_formula(Y ~ .)
+
+#Do the resamples
+all_resample <- fit_resamples(linear_all_wf, resamples = folds)
+
+#Extract the metric
+collect_metrics(all_resample)
+```
+
+Based on the previous results, it can be observed that when fitting the model and conducting a 10-fold cross-validation the RMSEs changed but still, the model that uses all predictors have a better metric (RMSE= 653, SE= 63.6) than the model that uses only `DOSE` as a predictor (RMSE= 696, SE= 68).
+
+And now, computing the same CV analysis, but setting a different seed.
+
+```{r}
+#Set the seed for reproducibility
+set.seed(2302)
+
+#Set the cross-validation folds as 10
+folds2 <- vfold_cv(train_data3, v= 10)
+
+#Set the model specification, for linear regression
+linear_mod2 <- linear_reg() %>% set_engine("lm")
+
+#ONE PREDICTOR LINEAR MODEL
+#Set the workflow
+linear_wf2 <- workflow() %>% add_model(linear_mod2) %>% add_formula(Y ~ DOSE)
+
+#Do the resamples
+dose_resample2 <- fit_resamples(linear_wf2, resamples = folds2)
+
+#Extract the metric
+collect_metrics(dose_resample2)
+
+#ALL PREDICTORS LINEAR MODEL
+#Set the workflow
+linear_all_wf2 <- workflow() %>% add_model(linear_mod2) %>% add_formula(Y ~ .)
+
+#Do the resamples
+all_resample2 <- fit_resamples(linear_all_wf2, resamples = folds2)
+
+#Extract the metric
+collect_metrics(all_resample2)
+```
+
+In this case, when changing the seed, the metrics changed for both models but they are similar in proportion. For the linear model with a single predictor the RMSE= 705.9 and for the model with all predictors the RMSE= 660. However, the standar error is higher for the model with all the predictors (SE= 57.51), compared to the model with a single predictor (SE= 53.33). Still, it seems that the linear model that uses all the predictors is better than the model that uses only `DOSE` as a single predictor.
