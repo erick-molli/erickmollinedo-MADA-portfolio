@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.537">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,13 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -96,10 +90,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -111,9 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
+      <div class="navbar-brand-container">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Erick Mollinedo MADA portfolio</span>
     </a>
@@ -125,40 +117,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../aboutme.html"> 
-<span class="menu-text">About Me</span></a>
+    <a class="nav-link" href="../aboutme.html" rel="" target="">
+ <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
  <span class="menu-text">Projects</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html">
+    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html" rel="" target="">
  <span class="dropdown-text">Starter Analysis Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html">
+    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html" rel="" target="">
  <span class="dropdown-text">R Coding Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html">
+    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html" rel="" target="">
  <span class="dropdown-text">Presentation Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html">
+    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html" rel="" target="">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../data-exercise/data-exercise.html">
+    <a class="dropdown-item" href="../data-exercise/data-exercise.html" rel="" target="">
  <span class="dropdown-text">Data Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../cdcdata-exercise/cdcdata-exercise.html">
+    <a class="dropdown-item" href="../cdcdata-exercise/cdcdata-exercise.html" rel="" target="">
  <span class="dropdown-text">CDC Data Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../fitting-exercise/fitting-exercise.html">
+    <a class="dropdown-item" href="../fitting-exercise/fitting-exercise.html" rel="" target="">
  <span class="dropdown-text">Fitting Exercise</span></a>
   </li>  
     </ul>
@@ -166,14 +158,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/erick-molli/erickmollinedo-MADA-portfolio"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/erick-molli/erickmollinedo-MADA-portfolio" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
-<span class="menu-text"></span></a>
+ <span class="menu-text"></span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -212,9 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-
 </header>
-
 
 <section id="data-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="data-visualization">Data visualization</h2>
@@ -225,8 +215,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'purrr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
@@ -236,7 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'scales' was built under R version 4.2.3</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'scales'
@@ -249,17 +272,20 @@ The following object is masked from 'package:readr':
 
     col_factor</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>here() starts at C:/Users/molli/OneDrive/Documentos/UGA/Spring 2024/MADA/erickmollinedo-MADA-portfolio</code></pre>
+<pre><code>Warning: package 'here' was built under R version 4.2.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at C:/Users/malik/Documents/1. UGA Classes/15. Malika Spring 2024/MADASpring_24/erickmollinedo-MADA-portfolio</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Loading the dataset and assign it to the <code>covid_poll</code> object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the `read_csv()` and `here()` functions to load the dataset</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>covid_poll <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"presentation-exercise"</span>, <span class="st">"data"</span>, <span class="st">"covid_concern_toplines.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the `read_csv()` and `here()` functions to load the dataset</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>covid_poll <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"presentation-exercise"</span>, <span class="st">"data"</span>, <span class="st">"covid_concern_toplines.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 1496 Columns: 8
 ── Column specification ────────────────────────────────────────────────────────
@@ -273,73 +299,69 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
 </div>
 <p>First I transformed the <code>modeldate</code> variable to date type using the <code>lubridate</code> package. I assigned it to the <code>covid_infect</code> dataframe. I also filtered only the responses needed for the graph, from the <code>subject</code> variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform 'modeldate' to date type and filter the data</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>covid_infect <span class="ot">&lt;-</span> covid_poll <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modeldate =</span> <span class="fu">mdy</span>(modeldate)) <span class="sc">%&gt;%</span> <span class="co">#Mutate the `modeldate` variable to month/day/year</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(modeldate <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2021-04-22"</span>) <span class="sc">&amp;</span> subject <span class="sc">==</span> <span class="st">'concern-infected'</span>) <span class="co">#Transform the `modeldate` variable as date type and filter the 'concern-infected' value from the `subject` variable.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform 'modeldate' to date type and filter the data</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>covid_infect <span class="ot">&lt;-</span> covid_poll <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">modeldate =</span> <span class="fu">mdy</span>(modeldate)) <span class="sc">%&gt;%</span> <span class="co">#Mutate the `modeldate` variable to month/day/year</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(modeldate <span class="sc">&lt;</span> <span class="fu">as.Date</span>(<span class="st">"2021-04-22"</span>) <span class="sc">&amp;</span> subject <span class="sc">==</span> <span class="st">'concern-infected'</span>) <span class="co">#Transform the `modeldate` variable as date type and filter the 'concern-infected' value from the `subject` variable.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now I decided to produce weekly averages, instead of using the daily datapoints, I assigned this to the <code>covid_weekly</code> dataframe</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate weekly averages of the estimates</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>covid_weekly <span class="ot">&lt;-</span> covid_infect <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(modeldate, <span class="st">"week"</span>)) <span class="sc">%&gt;%</span> <span class="co">#Group by weeks</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="co">#Produce the summaries for each response variable (4 code lines below)</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">very_estimate =</span> <span class="fu">mean</span>(very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">somewhat_estimate =</span> <span class="fu">mean</span>(somewhat_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">not_very_estimate =</span> <span class="fu">mean</span>(not_very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">not_at_all_estimate =</span> <span class="fu">mean</span>(not_at_all_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate weekly averages of the estimates</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>covid_weekly <span class="ot">&lt;-</span> covid_infect <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">week =</span> <span class="fu">floor_date</span>(modeldate, <span class="st">"week"</span>)) <span class="sc">%&gt;%</span> <span class="co">#Group by weeks</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>( <span class="co">#Produce the summaries for each response variable (4 code lines below)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">very_estimate =</span> <span class="fu">mean</span>(very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">somewhat_estimate =</span> <span class="fu">mean</span>(somewhat_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">not_very_estimate =</span> <span class="fu">mean</span>(not_very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">not_at_all_estimate =</span> <span class="fu">mean</span>(not_at_all_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">'drop'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then I created the <code>covid_longer</code> dataframe using the <code>pivot_longer()</code> function, so the data is more easy to be used for the final graph.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data to long format for plotting</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>covid_longer <span class="ot">&lt;-</span> covid_weekly <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(very_estimate, somewhat_estimate, not_very_estimate, not_at_all_estimate), <span class="co">#Use `pivot_longer()` to mutate the dataframe</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"estimate_type"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"estimate"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate_label =</span> <span class="fu">recode</span>(estimate_type, <span class="co">#Recode the values of the response variables to characters more legible (4 code lines below)</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"very_estimate"</span> <span class="ot">=</span> <span class="st">"Very"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"somewhat_estimate"</span> <span class="ot">=</span> <span class="st">"Somewhat"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"not_very_estimate"</span> <span class="ot">=</span> <span class="st">"Not Very"</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"not_at_all_estimate"</span> <span class="ot">=</span> <span class="st">"Not at all"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data to long format for plotting</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>covid_longer <span class="ot">&lt;-</span> covid_weekly <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(very_estimate, somewhat_estimate, not_very_estimate, not_at_all_estimate), <span class="co">#Use `pivot_longer()` to mutate the dataframe</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"estimate_type"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"estimate"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estimate_label =</span> <span class="fu">recode</span>(estimate_type, <span class="co">#Recode the values of the response variables to characters more legible (4 code lines below)</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"very_estimate"</span> <span class="ot">=</span> <span class="st">"Very"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"somewhat_estimate"</span> <span class="ot">=</span> <span class="st">"Somewhat"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"not_very_estimate"</span> <span class="ot">=</span> <span class="st">"Not Very"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"not_at_all_estimate"</span> <span class="ot">=</span> <span class="st">"Not at all"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And finally creating the plot using <code>ggplot()</code>. Each code chunk is detailed below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating the time trend graph</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covid_longer, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> estimate, <span class="at">group =</span> estimate_label, <span class="at">color =</span> estimate_label)) <span class="sc">+</span> <span class="co">#Selecting the x and y variables and grouping by `estimate_label`</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co">#Select a line graph</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"1 month"</span>, <span class="at">date_labels =</span> <span class="st">"%m/%d"</span>, <span class="co">#Selecting the x-scale breaks in 1-month intervals and selecting as month/day format</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">limits =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2020-02-01"</span>, <span class="st">"2021-04-01"</span>))) <span class="sc">+</span> <span class="co">#Selecting the start and end date limits</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">75</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">50</span>)) <span class="sc">+</span> <span class="co">#Selecting the y-axis limits, and set the breaks</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Very"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Somewhat"</span> <span class="ot">=</span> <span class="st">"orange"</span>, </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Not Very"</span> <span class="ot">=</span> <span class="st">"mediumpurple1"</span>, <span class="st">"Not at all"</span> <span class="ot">=</span> <span class="st">"purple"</span>)) <span class="sc">+</span> <span class="co">#Setting the colors</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"How worried are Americans about infection?"</span>, <span class="co">#Writing the title</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"How concerned Americans say they are that they, someone in their family or someone else they know will"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"become infected with the coronavirus"</span>))<span class="sc">+</span> <span class="co">#Writing the subtitle, and using "\n" to sepparate it in two lines</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co">#setting the theme</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="co">#The position of the legend for level of concern</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">10</span>), <span class="co">#Position and size of the title</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">8</span>), <span class="co">#Position and size of the subtitle</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(), <span class="co">#Removing the x-axis label</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())<span class="sc">+</span> <span class="co">#Removing the y-axis label</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-02-29"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> <span class="co">#Setting a dashed line on a specific date with text below, the following 4 lines of code are for another 4 specific lines</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-05-28"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-10-02"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-11-07"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2021-01-20"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-02-29"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"First U.S."</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"death reported"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co">#Setting the text for the first dashed line, breaking it into two text parts so they fit inside the plot, also setting the angle at 0 and in italic font. (The following lines of code are for the other 4 texts)</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-05-28"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"U.S. deaths"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"surpass 100,000"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-09-02"</span>), <span class="at">y =</span> <span class="dv">60</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Trump diagnosed"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"with COVID-19"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-11-07"</span>), <span class="at">y =</span> <span class="dv">48</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Biden declared"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"election winner"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2021-01-20"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Biden sworn"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"into office"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating the time trend graph</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covid_longer, <span class="fu">aes</span>(<span class="at">x =</span> week, <span class="at">y =</span> estimate, <span class="at">group =</span> estimate_label, <span class="at">color =</span> estimate_label)) <span class="sc">+</span> <span class="co">#Selecting the x and y variables and grouping by `estimate_label`</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co">#Select a line graph</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"1 month"</span>, <span class="at">date_labels =</span> <span class="st">"%m/%d"</span>, <span class="co">#Selecting the x-scale breaks in 1-month intervals and selecting as month/day format</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">limits =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"2020-02-01"</span>, <span class="st">"2021-04-01"</span>))) <span class="sc">+</span> <span class="co">#Selecting the start and end date limits</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">75</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">50</span>)) <span class="sc">+</span> <span class="co">#Selecting the y-axis limits, and set the breaks</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Very"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Somewhat"</span> <span class="ot">=</span> <span class="st">"orange"</span>, </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Not Very"</span> <span class="ot">=</span> <span class="st">"mediumpurple1"</span>, <span class="st">"Not at all"</span> <span class="ot">=</span> <span class="st">"purple"</span>)) <span class="sc">+</span> <span class="co">#Setting the colors</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"How worried are Americans about infection?"</span>, <span class="co">#Writing the title</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste</span>(<span class="st">"How concerned Americans say they are that they, someone in their family or someone else they know will"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"become infected with the coronavirus"</span>))<span class="sc">+</span> <span class="co">#Writing the subtitle, and using "\n" to sepparate it in two lines</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="co">#setting the theme</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="co">#The position of the legend for level of concern</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">10</span>), <span class="co">#Position and size of the title</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">8</span>), <span class="co">#Position and size of the subtitle</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(), <span class="co">#Removing the x-axis label</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())<span class="sc">+</span> <span class="co">#Removing the y-axis label</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-02-29"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> <span class="co">#Setting a dashed line on a specific date with text below, the following 4 lines of code are for another 4 specific lines</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-05-28"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-10-02"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2020-11-07"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">"2021-01-20"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-02-29"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"First U.S."</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"death reported"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co">#Setting the text for the first dashed line, breaking it into two text parts so they fit inside the plot, also setting the angle at 0 and in italic font. (The following lines of code are for the other 4 texts)</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-05-28"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"U.S. deaths"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"surpass 100,000"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-09-02"</span>), <span class="at">y =</span> <span class="dv">60</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Trump diagnosed"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"with COVID-19"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2020-11-07"</span>), <span class="at">y =</span> <span class="dv">48</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Biden declared"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"election winner"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2021-01-20"</span>), <span class="at">y =</span> <span class="dv">50</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Biden sworn"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"into office"</span>)), <span class="at">angle =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 12 rows containing missing values (`geom_line()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="presentation-exercise_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p><img src="presentation-exercise_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Note: The code has been updated to reflect changes from suggestions from others. Also, the original graph is interactive, which in my case I did not capture. Here is the original graph again for comparison:</p>
@@ -350,59 +372,63 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
 <p>To create a table I used the same dataset as above.</p>
 <p>I loaded an extra package for this part:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'gt' was built under R version 4.2.3</code></pre>
+</div>
 </div>
 <p>First I created a new object called <code>covid_summary</code>, that will be used to create the table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the dataframe used as base for the table</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>covid_summary <span class="ot">&lt;-</span> covid_infect <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(<span class="fu">as.Date</span>(modeldate, <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>), <span class="st">"month"</span>)) <span class="sc">%&gt;%</span> <span class="co">#Make the date in consistent format and mutate the `start_date` variable so it's named as `month`</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> <span class="co">#Group by month of the year</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="co">#Create the average percent by month, and round it to two decimal places (applies to the following 4 lines of code)</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_very_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_somewhat_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(somewhat_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_not_very_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(not_very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_not_at_all_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(not_at_all_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"avg_"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(., <span class="at">nsmall =</span> <span class="dv">2</span>)))) <span class="sc">%&gt;%</span> <span class="co">#Change variables to numeric</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Month =</span> <span class="st">"month"</span>, <span class="co">#Rename the variables to be more legible</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">Very =</span> <span class="st">"avg_very_estimate"</span>,</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Somewhat =</span> <span class="st">"avg_somewhat_estimate"</span>,</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Not very</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"avg_not_very_estimate"</span>,</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Not at all</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"avg_not_at_all_estimate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the dataframe used as base for the table</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>covid_summary <span class="ot">&lt;-</span> covid_infect <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">floor_date</span>(<span class="fu">as.Date</span>(modeldate, <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>), <span class="st">"month"</span>)) <span class="sc">%&gt;%</span> <span class="co">#Make the date in consistent format and mutate the `start_date` variable so it's named as `month`</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span> <span class="co">#Group by month of the year</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>( <span class="co">#Create the average percent by month, and round it to two decimal places (applies to the following 4 lines of code)</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_very_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_somewhat_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(somewhat_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_not_very_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(not_very_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_not_at_all_estimate =</span> <span class="fu">round</span>(<span class="fu">mean</span>(not_at_all_estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"avg_"</span>), <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="fu">format</span>(., <span class="at">nsmall =</span> <span class="dv">2</span>)))) <span class="sc">%&gt;%</span> <span class="co">#Change variables to numeric</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Month =</span> <span class="st">"month"</span>, <span class="co">#Rename the variables to be more legible</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">Very =</span> <span class="st">"avg_very_estimate"</span>,</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">Somewhat =</span> <span class="st">"avg_somewhat_estimate"</span>,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Not very</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"avg_not_very_estimate"</span>,</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Not at all</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"avg_not_at_all_estimate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And now creating the table using the <code>gt</code> package, and apply some style edits.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a professional table using the `gt` package.</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>covid_summary <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="co">#Create the base table</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">tab_header</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How worried are Americans about COVID-19 infection?"</span>) <span class="sc">%&gt;%</span> <span class="co">#Attach a title to the table</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="at">label =</span> <span class="st">"Concern Percentage"</span>, <span class="co">#Create a subtitle or header for columns 2 to 5</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(Very, Somewhat, <span class="st">`</span><span class="at">Not very</span><span class="st">`</span>, <span class="st">`</span><span class="at">Not at all</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="co">#Select the columns or variables</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>), <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns=</span><span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Very"</span>, <span class="st">"Somewhat"</span>, <span class="st">"Not very"</span>, <span class="st">"Not at all"</span>))) <span class="sc">%&gt;%</span> <span class="co">#Setting the column labels in bold</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>), <span class="at">locations =</span> <span class="fu">cells_title</span>()) <span class="co">#Setting the title in bold</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a professional table using the `gt` package.</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>covid_summary <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="co">#Create the base table</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">tab_header</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How worried are Americans about COVID-19 infection?"</span>) <span class="sc">%&gt;%</span> <span class="co">#Attach a title to the table</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_spanner</span>(<span class="at">label =</span> <span class="st">"Concern Percentage"</span>, <span class="co">#Create a subtitle or header for columns 2 to 5</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">vars</span>(Very, Somewhat, <span class="st">`</span><span class="at">Not very</span><span class="st">`</span>, <span class="st">`</span><span class="at">Not at all</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> <span class="co">#Select the columns or variables</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>), <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns=</span><span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Very"</span>, <span class="st">"Somewhat"</span>, <span class="st">"Not very"</span>, <span class="st">"Not at all"</span>))) <span class="sc">%&gt;%</span> <span class="co">#Setting the column labels in bold</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>), <span class="at">locations =</span> <span class="fu">cells_title</span>()) <span class="co">#Setting the title in bold</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Since gt v0.3.0, `columns = vars(...)` has been deprecated.
 • Please use `columns = c(...)` instead.</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="mxziweygkv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mxziweygkv table {
+
+<div id="tuhobwxalp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tuhobwxalp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mxziweygkv thead, #mxziweygkv tbody, #mxziweygkv tfoot, #mxziweygkv tr, #mxziweygkv td, #mxziweygkv th {
+#tuhobwxalp thead, #tuhobwxalp tbody, #tuhobwxalp tfoot, #tuhobwxalp tr, #tuhobwxalp td, #tuhobwxalp th {
   border-style: none;
 }
 
-#mxziweygkv p {
+#tuhobwxalp p {
   margin: 0;
   padding: 0;
 }
 
-#mxziweygkv .gt_table {
+#tuhobwxalp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -428,12 +454,12 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-left-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_caption {
+#tuhobwxalp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mxziweygkv .gt_title {
+#tuhobwxalp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -445,7 +471,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-bottom-width: 0;
 }
 
-#mxziweygkv .gt_subtitle {
+#tuhobwxalp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -457,7 +483,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-top-width: 0;
 }
 
-#mxziweygkv .gt_heading {
+#tuhobwxalp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -469,13 +495,13 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-right-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_bottom_border {
+#tuhobwxalp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_col_headings {
+#tuhobwxalp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -490,7 +516,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-right-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_col_heading {
+#tuhobwxalp .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -510,7 +536,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   overflow-x: hidden;
 }
 
-#mxziweygkv .gt_column_spanner_outer {
+#tuhobwxalp .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -522,15 +548,15 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   padding-right: 4px;
 }
 
-#mxziweygkv .gt_column_spanner_outer:first-child {
+#tuhobwxalp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mxziweygkv .gt_column_spanner_outer:last-child {
+#tuhobwxalp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mxziweygkv .gt_column_spanner {
+#tuhobwxalp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -542,11 +568,11 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   width: 100%;
 }
 
-#mxziweygkv .gt_spanner_row {
+#tuhobwxalp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mxziweygkv .gt_group_heading {
+#tuhobwxalp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -572,7 +598,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   text-align: left;
 }
 
-#mxziweygkv .gt_empty_group_heading {
+#tuhobwxalp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -587,15 +613,15 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   vertical-align: middle;
 }
 
-#mxziweygkv .gt_from_md > :first-child {
+#tuhobwxalp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mxziweygkv .gt_from_md > :last-child {
+#tuhobwxalp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mxziweygkv .gt_row {
+#tuhobwxalp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -614,7 +640,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   overflow-x: hidden;
 }
 
-#mxziweygkv .gt_stub {
+#tuhobwxalp .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -627,7 +653,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   padding-right: 5px;
 }
 
-#mxziweygkv .gt_stub_row_group {
+#tuhobwxalp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -641,15 +667,15 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   vertical-align: top;
 }
 
-#mxziweygkv .gt_row_group_first td {
+#tuhobwxalp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mxziweygkv .gt_row_group_first th {
+#tuhobwxalp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mxziweygkv .gt_summary_row {
+#tuhobwxalp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -659,16 +685,16 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   padding-right: 5px;
 }
 
-#mxziweygkv .gt_first_summary_row {
+#tuhobwxalp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_first_summary_row.thick {
+#tuhobwxalp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mxziweygkv .gt_last_summary_row {
+#tuhobwxalp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -678,7 +704,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-bottom-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_grand_summary_row {
+#tuhobwxalp .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -688,7 +714,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   padding-right: 5px;
 }
 
-#mxziweygkv .gt_first_grand_summary_row {
+#tuhobwxalp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -698,7 +724,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-top-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_last_grand_summary_row_top {
+#tuhobwxalp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -708,11 +734,11 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-bottom-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_striped {
+#tuhobwxalp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mxziweygkv .gt_table_body {
+#tuhobwxalp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -721,7 +747,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-bottom-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_footnotes {
+#tuhobwxalp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -735,7 +761,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-right-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_footnote {
+#tuhobwxalp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -744,7 +770,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   padding-right: 5px;
 }
 
-#mxziweygkv .gt_sourcenotes {
+#tuhobwxalp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -758,7 +784,7 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   border-right-color: #D3D3D3;
 }
 
-#mxziweygkv .gt_sourcenote {
+#tuhobwxalp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -766,192 +792,165 @@ dbl (4): very_estimate, somewhat_estimate, not_very_estimate, not_at_all_est...
   padding-right: 5px;
 }
 
-#mxziweygkv .gt_left {
+#tuhobwxalp .gt_left {
   text-align: left;
 }
 
-#mxziweygkv .gt_center {
+#tuhobwxalp .gt_center {
   text-align: center;
 }
 
-#mxziweygkv .gt_right {
+#tuhobwxalp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mxziweygkv .gt_font_normal {
+#tuhobwxalp .gt_font_normal {
   font-weight: normal;
 }
 
-#mxziweygkv .gt_font_bold {
+#tuhobwxalp .gt_font_bold {
   font-weight: bold;
 }
 
-#mxziweygkv .gt_font_italic {
+#tuhobwxalp .gt_font_italic {
   font-style: italic;
 }
 
-#mxziweygkv .gt_super {
+#tuhobwxalp .gt_super {
   font-size: 65%;
 }
 
-#mxziweygkv .gt_footnote_marks {
+#tuhobwxalp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mxziweygkv .gt_asterisk {
+#tuhobwxalp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mxziweygkv .gt_indent_1 {
+#tuhobwxalp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mxziweygkv .gt_indent_2 {
+#tuhobwxalp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mxziweygkv .gt_indent_3 {
+#tuhobwxalp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mxziweygkv .gt_indent_4 {
+#tuhobwxalp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mxziweygkv .gt_indent_5 {
+#tuhobwxalp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="header gt_heading">
-<th colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="font-weight: bold">How worried are Americans about COVID-19 infection?</th>
-</tr>
-<tr class="odd gt_col_headings gt_spanner_row">
-<th rowspan="2" id="Month" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Month</th>
-<th colspan="4" id="Concern Percentage" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><span class="gt_column_spanner">Concern Percentage</span></th>
-</tr>
-<tr class="header gt_col_headings">
-<th id="Very" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Very</th>
-<th id="Somewhat" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Somewhat</th>
-<th id="Not very" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Not very</th>
-<th id="Not at all" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" style="font-weight: bold" scope="col">Not at all</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2020-02-01</td>
-<td class="gt_row gt_right" headers="Very">17.48</td>
-<td class="gt_row gt_right" headers="Somewhat">24.24</td>
-<td class="gt_row gt_right" headers="Not very">36.61</td>
-<td class="gt_row gt_right" headers="Not at all">20.67</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2020-03-01</td>
-<td class="gt_row gt_right" headers="Very">24.47</td>
-<td class="gt_row gt_right" headers="Somewhat">33.54</td>
-<td class="gt_row gt_right" headers="Not very">26.97</td>
-<td class="gt_row gt_right" headers="Not at all">13.87</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2020-04-01</td>
-<td class="gt_row gt_right" headers="Very">33.96</td>
-<td class="gt_row gt_right" headers="Somewhat">37.27</td>
-<td class="gt_row gt_right" headers="Not very">18.85</td>
-<td class="gt_row gt_right" headers="Not at all">8.90</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2020-05-01</td>
-<td class="gt_row gt_right" headers="Very">32.06</td>
-<td class="gt_row gt_right" headers="Somewhat">36.47</td>
-<td class="gt_row gt_right" headers="Not very">19.80</td>
-<td class="gt_row gt_right" headers="Not at all">11.03</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2020-06-01</td>
-<td class="gt_row gt_right" headers="Very">29.07</td>
-<td class="gt_row gt_right" headers="Somewhat">35.64</td>
-<td class="gt_row gt_right" headers="Not very">21.00</td>
-<td class="gt_row gt_right" headers="Not at all">13.22</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2020-07-01</td>
-<td class="gt_row gt_right" headers="Very">33.79</td>
-<td class="gt_row gt_right" headers="Somewhat">34.08</td>
-<td class="gt_row gt_right" headers="Not very">18.17</td>
-<td class="gt_row gt_right" headers="Not at all">11.91</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2020-08-01</td>
-<td class="gt_row gt_right" headers="Very">35.02</td>
-<td class="gt_row gt_right" headers="Somewhat">33.75</td>
-<td class="gt_row gt_right" headers="Not very">17.79</td>
-<td class="gt_row gt_right" headers="Not at all">11.30</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2020-09-01</td>
-<td class="gt_row gt_right" headers="Very">32.77</td>
-<td class="gt_row gt_right" headers="Somewhat">33.77</td>
-<td class="gt_row gt_right" headers="Not very">19.80</td>
-<td class="gt_row gt_right" headers="Not at all">12.12</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2020-10-01</td>
-<td class="gt_row gt_right" headers="Very">31.33</td>
-<td class="gt_row gt_right" headers="Somewhat">34.89</td>
-<td class="gt_row gt_right" headers="Not very">19.24</td>
-<td class="gt_row gt_right" headers="Not at all">11.98</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2020-11-01</td>
-<td class="gt_row gt_right" headers="Very">32.63</td>
-<td class="gt_row gt_right" headers="Somewhat">34.49</td>
-<td class="gt_row gt_right" headers="Not very">18.47</td>
-<td class="gt_row gt_right" headers="Not at all">12.32</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2020-12-01</td>
-<td class="gt_row gt_right" headers="Very">35.36</td>
-<td class="gt_row gt_right" headers="Somewhat">34.14</td>
-<td class="gt_row gt_right" headers="Not very">17.72</td>
-<td class="gt_row gt_right" headers="Not at all">11.30</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2021-01-01</td>
-<td class="gt_row gt_right" headers="Very">35.36</td>
-<td class="gt_row gt_right" headers="Somewhat">33.02</td>
-<td class="gt_row gt_right" headers="Not very">17.33</td>
-<td class="gt_row gt_right" headers="Not at all">11.65</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2021-02-01</td>
-<td class="gt_row gt_right" headers="Very">36.17</td>
-<td class="gt_row gt_right" headers="Somewhat">30.77</td>
-<td class="gt_row gt_right" headers="Not very">17.68</td>
-<td class="gt_row gt_right" headers="Not at all">11.64</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_right" headers="Month">2021-03-01</td>
-<td class="gt_row gt_right" headers="Very">30.80</td>
-<td class="gt_row gt_right" headers="Somewhat">33.52</td>
-<td class="gt_row gt_right" headers="Not very">20.34</td>
-<td class="gt_row gt_right" headers="Not at all">13.20</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="Month">2021-04-01</td>
-<td class="gt_row gt_right" headers="Very">27.17</td>
-<td class="gt_row gt_right" headers="Somewhat">32.90</td>
-<td class="gt_row gt_right" headers="Not very">25.60</td>
-<td class="gt_row gt_right" headers="Not at all">15.28</td>
-</tr>
-</tbody>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="font-weight: bold;">How worried are Americans about COVID-19 infection?</td>
+    </tr>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" style="font-weight: bold;" scope="col" id="Month">Month</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" scope="colgroup" id="Concern Percentage">
+        <span class="gt_column_spanner">Concern Percentage</span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Very">Very</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Somewhat">Somewhat</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Not very">Not very</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="Not at all">Not at all</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Month" class="gt_row gt_right">2020-02-01</td>
+<td headers="Very" class="gt_row gt_right">17.48</td>
+<td headers="Somewhat" class="gt_row gt_right">24.24</td>
+<td headers="Not very" class="gt_row gt_right">36.61</td>
+<td headers="Not at all" class="gt_row gt_right">20.67</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-03-01</td>
+<td headers="Very" class="gt_row gt_right">24.47</td>
+<td headers="Somewhat" class="gt_row gt_right">33.54</td>
+<td headers="Not very" class="gt_row gt_right">26.97</td>
+<td headers="Not at all" class="gt_row gt_right">13.87</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-04-01</td>
+<td headers="Very" class="gt_row gt_right">33.96</td>
+<td headers="Somewhat" class="gt_row gt_right">37.27</td>
+<td headers="Not very" class="gt_row gt_right">18.85</td>
+<td headers="Not at all" class="gt_row gt_right">8.90</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-05-01</td>
+<td headers="Very" class="gt_row gt_right">32.06</td>
+<td headers="Somewhat" class="gt_row gt_right">36.47</td>
+<td headers="Not very" class="gt_row gt_right">19.80</td>
+<td headers="Not at all" class="gt_row gt_right">11.03</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-06-01</td>
+<td headers="Very" class="gt_row gt_right">29.07</td>
+<td headers="Somewhat" class="gt_row gt_right">35.64</td>
+<td headers="Not very" class="gt_row gt_right">21.00</td>
+<td headers="Not at all" class="gt_row gt_right">13.22</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-07-01</td>
+<td headers="Very" class="gt_row gt_right">33.79</td>
+<td headers="Somewhat" class="gt_row gt_right">34.08</td>
+<td headers="Not very" class="gt_row gt_right">18.17</td>
+<td headers="Not at all" class="gt_row gt_right">11.91</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-08-01</td>
+<td headers="Very" class="gt_row gt_right">35.02</td>
+<td headers="Somewhat" class="gt_row gt_right">33.75</td>
+<td headers="Not very" class="gt_row gt_right">17.79</td>
+<td headers="Not at all" class="gt_row gt_right">11.30</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-09-01</td>
+<td headers="Very" class="gt_row gt_right">32.77</td>
+<td headers="Somewhat" class="gt_row gt_right">33.77</td>
+<td headers="Not very" class="gt_row gt_right">19.80</td>
+<td headers="Not at all" class="gt_row gt_right">12.12</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-10-01</td>
+<td headers="Very" class="gt_row gt_right">31.33</td>
+<td headers="Somewhat" class="gt_row gt_right">34.89</td>
+<td headers="Not very" class="gt_row gt_right">19.24</td>
+<td headers="Not at all" class="gt_row gt_right">11.98</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-11-01</td>
+<td headers="Very" class="gt_row gt_right">32.63</td>
+<td headers="Somewhat" class="gt_row gt_right">34.49</td>
+<td headers="Not very" class="gt_row gt_right">18.47</td>
+<td headers="Not at all" class="gt_row gt_right">12.32</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2020-12-01</td>
+<td headers="Very" class="gt_row gt_right">35.36</td>
+<td headers="Somewhat" class="gt_row gt_right">34.14</td>
+<td headers="Not very" class="gt_row gt_right">17.72</td>
+<td headers="Not at all" class="gt_row gt_right">11.30</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2021-01-01</td>
+<td headers="Very" class="gt_row gt_right">35.36</td>
+<td headers="Somewhat" class="gt_row gt_right">33.02</td>
+<td headers="Not very" class="gt_row gt_right">17.33</td>
+<td headers="Not at all" class="gt_row gt_right">11.65</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2021-02-01</td>
+<td headers="Very" class="gt_row gt_right">36.17</td>
+<td headers="Somewhat" class="gt_row gt_right">30.77</td>
+<td headers="Not very" class="gt_row gt_right">17.68</td>
+<td headers="Not at all" class="gt_row gt_right">11.64</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2021-03-01</td>
+<td headers="Very" class="gt_row gt_right">30.80</td>
+<td headers="Somewhat" class="gt_row gt_right">33.52</td>
+<td headers="Not very" class="gt_row gt_right">20.34</td>
+<td headers="Not at all" class="gt_row gt_right">13.20</td></tr>
+    <tr><td headers="Month" class="gt_row gt_right">2021-04-01</td>
+<td headers="Very" class="gt_row gt_right">27.17</td>
+<td headers="Somewhat" class="gt_row gt_right">32.90</td>
+<td headers="Not very" class="gt_row gt_right">25.60</td>
+<td headers="Not at all" class="gt_row gt_right">15.28</td></tr>
+  </tbody>
+  
+  
 </table>
-
 </div>
 </div>
 </div>
@@ -1040,9 +1039,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1052,17 +1052,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1075,120 +1066,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      return note.innerHTML;
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1232,7 +1109,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1258,32 +1134,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1344,7 +1194,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
 
 
 

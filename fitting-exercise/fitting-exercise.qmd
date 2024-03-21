@@ -10,7 +10,7 @@ editor: visual
 
 These are the packages I used for this exercise
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(here)
 library(readr)
 library(tidyverse)
@@ -493,3 +493,151 @@ collect_metrics(all_resample2)
 ```
 
 In this case, when changing the seed, the metrics changed for both models but they are similar in proportion. For the linear model with a single predictor the RMSE= 705.9 and for the model with all predictors the RMSE= 660. However, the standar error is higher for the model with all the predictors (SE= 57.51), compared to the model with a single predictor (SE= 53.33). Still, it seems that the linear model that uses all the predictors is better than the model that uses only `DOSE` as a single predictor.
+
+## This section is added by Malika Dhakhwa.
+
+I conducted a visual inspection of performance of the models by plotting the predicted values from all three models against the observed values of the training data.
+
+First, I extracted the predicted values of the Null model.For the other two models, this step has already been completed in earlier phases.
+
+```{r}
+# Recovering predicted values of the null model
+null_pred <- predict(lm_null, new_data = train_data3)
+```
+
+I created a combined data frame of the predictors in long format for all three models and created the plot.
+
+```{r}
+#| warning: false
+
+#Creating the object for the outcome variable Y in the training data
+observed_values <- train_data3$Y
+
+#Creating separate data frames for each set of predictions with model labels
+
+df_dose <- data.frame(Observed = observed_values, Predicted = lmdose_pred$.pred, Model="Dose Model")
+df_all <- data.frame(Observed= observed_values, Predicted = lmall_pred$.pred, Model="Full Model")
+df_null<- data.frame(Observed = observed_values, Predicted = null_pred$.pred, Model="Null Model")
+
+#Combining all the predicted values to a single data frame by rows to create a long format data
+combined_df <- rbind(df_dose, df_all, df_null)
+
+#Plotting of predicted vs observed data
+ggplot(combined_df, aes(x=Observed, y=Predicted, color=Model))+
+  geom_point()+ 
+  scale_color_manual(values = c("Null Model"= "lightblue", "Dose Model"="red", "Full Model"="green")) + 
+  geom_abline(intercept = 0, slope = 1, linetype = "solid", color="black") + #45 degree line
+  xlim(0, 5000) + #X-axis limits
+  ylim(0, 5000) + #y-axis limits
+  labs(x= "Observed Values", y ="Predicted Values", title = "Predicted vs. Observed Values")+
+  theme_minimal() # Use a minimal theme
+```
+
+The predictions from Null model follows a horizontal line indicating that they assume a single value which is the mean of the outcome variable. The variable Dose in the observed data has only three distinct values, leading the Dose model's predictions to appear as three horizontal lines in the plot, marked by red dots. One of these predicted values is close to that of the Null model, creating almost overlapping with the predictions from the Null model. The predicted values from the model incorporating all predictors are more dispersed indicating that this model is better than the other two models. However, the scatter still exhibits some pattern. To further investigate the existence of any patterns, I plotted the predicted values against the residuals for this comprehensive model.
+
+First, I computed the residuals and subsequently generated the plot.
+
+```{r}
+#creating an object for the full model from the combined data adding a column of Residuals  
+all_vars_residuals <- combined_df %>%
+  filter(Model == "Full Model")%>%
+  mutate(Residuals = Predicted - Observed)
+
+# plotting Predicted vs. Residuals for the full model
+
+ggplot(all_vars_residuals, aes(x = Predicted, y = Residuals)) +
+  geom_point(color = "darkblue") + # Plot the residuals
+  geom_hline(yintercept = 0, linetype = "solid", color = "darkred") + # Add a horizontal line at 0
+  labs(x = "Predicted Values", y = "Residuals", title = "Residuals vs. Predicted Values (Full Model)") +
+  ylim(-2500, 2500) +  #y-axis limits
+  theme_minimal() # Use a minimal theme
+```
+
+The residuals are not randomly scattered around the zero line. We can see that there is a discernible pattern suggesting that the model may not be capturing some of the data features.
+
+### Model Uncertainty Assessment with Bootstrap
+
+I assessed the variability of the predicted values by employing bootstrap resampling, drawing 100 samples from the training data. For each sample, I refitted the comprehensive model that includes all the predictors. The goal is to measure the uncertainty present in the model's predictions.
+
+```{r}
+#Setting the seed same as at the beginning of the exercise for reproducibility
+set.seed(rngseed)
+
+#Creating 100 bootstrap samples from the training data
+boot_samples <-bootstraps(train_data3, times = 100)
+
+#Following codes help check any bootstrap sample if needed  
+dat_sample <- rsample::analysis(boot_samples$splits[[57]]) #Replace [[57]] by [[relevant sample no.from 1 to 100]] to view that sample
+#dat_sample
+```
+
+I fitted the model to each Bootstrap sample and collected the predictions into a list using the map function.I converted the list to a matrix to simplify data manipulation.
+
+```{r}
+# Setting the function to fit model and make predictions
+fit_and_predict <- function(boot) {
+  # Fit the model to the bootstrap sample
+  lm_all_bs <- linear_reg() %>%
+    set_engine("lm") %>%
+    set_mode("regression") %>%
+    fit(Y ~ ., data = analysis(boot))
+  
+  # Make predictions on the original training data
+  predictions <- predict(lm_all_bs, new_data = train_data3)$.pred
+  
+  return(predictions)
+}
+
+# Applying the function to each bootstrap sample and collecting predictions
+predictions_list <- map(boot_samples$splits, fit_and_predict)
+
+# Converting the list of predictions to a matrix
+predictions_matrix <- do.call(cbind, predictions_list)
+
+```
+
+I computed the means, medians and 89% confidence intervals of the predictions for each of the samples.
+
+```{r}
+# Calculating the mean prediction for each sample
+mean_predictions <- rowMeans(predictions_matrix)
+
+#Computing median and 89% Confidence Interval
+preds <-predictions_matrix %>% 
+  apply(1, quantile, c(0.055, 0.5, 0.945))%>%  
+  t()
+
+#mean_predictions
+preds
+```
+
+Finally, I generated an error bar plot that illustrates a comparison between the observed values and the point estimates obtained from the original predictions on the training data. This plot also exhibits the median and the variability within the predictions, as indicated by upper and lower bounds of the predictions from the bootstrap samples. ChatGPT assisted me with creating this plot.
+
+```{r}
+#Converting the preds matrix into a data frame
+preds_df <- as.data.frame(preds)
+names(preds_df) <- c("LowerBound", "Median", "UpperBound" )
+
+#Adding observed values and original predictions of the training data 
+preds_df<- mutate(preds_df,
+                  Observed= train_data3$Y)
+
+ggplot(preds_df, aes(x = Observed)) +
+  geom_point(aes(y = lmall_pred$.pred, color = "Original Predictions"), size=2) +
+  geom_point(aes(y = Median, color = "Median Predictions"), size=2) +
+  geom_errorbar(aes(ymin = LowerBound, ymax = UpperBound, y = Median, color = "Confidence Intervals"), width = .2) +
+  geom_abline(intercept = 0, slope = 1,  linetype="solid") +
+  labs(x = "Observed Values", y = "Predictions", title = "Predictions vs. Observed Values") +
+  scale_color_manual(name = "Legend", 
+                     values = c("Original Predictions" = "black", 
+                                "Median Predictions" = "red",
+                                "Confidence Intervals" = "darkgreen",
+                                "Reference Line" = "lightblue")) +
+  theme_minimal() +
+  coord_fixed()+
+  theme(legend.position = "top", # Keeps the legend at the top of the plot
+        )
+
+```
+
+We can see that the original predictions (means) and medians are closely aligned.The predictions generally seem to follow the line at lower values and with shorter Confidence Intervals. This suggests that the model has reasonable predictive accuracy at lower values. However, at higher values of the observed data, some predictions are away from the line with wider confidence intervals indicating higher uncertainty of the predicted values.
