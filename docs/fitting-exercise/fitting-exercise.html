@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.537">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Erick E. Mollinedo">
-<meta name="dcterms.date" content="2024-03-21">
+<meta name="dcterms.date" content="2024-03-22">
 
 <title>Erick Mollinedo MADA portfolio - Fitting exercise</title>
 <style>
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,8 +96,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -103,9 +111,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Erick Mollinedo MADA portfolio</span>
     </a>
@@ -117,40 +125,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../aboutme.html" rel="" target="">
- <span class="menu-text">About Me</span></a>
+    <a class="nav-link" href="../aboutme.html"> 
+<span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Projects</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html" rel="" target="">
+    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html">
  <span class="dropdown-text">Starter Analysis Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html">
  <span class="dropdown-text">R Coding Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html">
  <span class="dropdown-text">Presentation Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../data-exercise/data-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../data-exercise/data-exercise.html">
  <span class="dropdown-text">Data Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../cdcdata-exercise/cdcdata-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../cdcdata-exercise/cdcdata-exercise.html">
  <span class="dropdown-text">CDC Data Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../fitting-exercise/fitting-exercise.html" rel="" target="">
+    <a class="dropdown-item" href="../fitting-exercise/fitting-exercise.html">
  <span class="dropdown-text">Fitting Exercise</span></a>
   </li>  
     </ul>
@@ -158,14 +166,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/erick-molli/erickmollinedo-MADA-portfolio" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/erick-molli/erickmollinedo-MADA-portfolio"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -196,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 21, 2024</p>
+      <p class="date">March 22, 2024</p>
     </div>
   </div>
   
@@ -204,7 +212,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="mavoglurant-modeling-exercise-week-8" class="level2">
 <h2 class="anchored" data-anchor-id="mavoglurant-modeling-exercise-week-8">Mavoglurant modeling Exercise (Week 8)</h2>
@@ -244,7 +254,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> DOSE) <span class="sc">+</span> <span class="co">#Group by DOSE</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time"</span>, <span class="at">y =</span> <span class="st">"Mavoglurant concentration"</span>, <span class="at">color =</span> <span class="st">"Dose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Now, keeping just one of the observations for individuals that have two <code>OCC</code> observations.</p>
@@ -299,7 +313,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Dose"</span>, <span class="at">y=</span> <span class="st">"Mavoglurant concentration"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Based on the previous plot, it can be observed that at higher dose, the concentration of mavoglurant (predicted variable) increases. It is also seen that the range of concentrations is higher at the higher dose (50).</p>
@@ -313,7 +331,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram of AGE</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mavoglurant_new, <span class="fu">aes</span>(<span class="at">x=</span> AGE))<span class="sc">+</span></span>
@@ -323,7 +345,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram of WT</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mavoglurant_new, <span class="fu">aes</span>(<span class="at">x=</span> WT))<span class="sc">+</span></span>
@@ -333,7 +359,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Histogram of HT</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mavoglurant_new, <span class="fu">aes</span>(<span class="at">x=</span> HT))<span class="sc">+</span></span>
@@ -343,7 +373,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>In the previous plots in can be seen that the dependent (Y) variable and the Weight, follow a normal distribution. Height is observed that is skewed to the right, so this variable could not be following a normal distribution. On the other hand, it is observed that Age follows a bi-modal distribution. This is providing an insight about maybe first applying a regression model to this dataset.</p>
@@ -359,24 +393,23 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualize the table</span></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>sumtable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<div id="blwqnawacy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#blwqnawacy table {
+<div id="mmnkiufjaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mmnkiufjaj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#blwqnawacy thead, #blwqnawacy tbody, #blwqnawacy tfoot, #blwqnawacy tr, #blwqnawacy td, #blwqnawacy th {
+#mmnkiufjaj thead, #mmnkiufjaj tbody, #mmnkiufjaj tfoot, #mmnkiufjaj tr, #mmnkiufjaj td, #mmnkiufjaj th {
   border-style: none;
 }
 
-#blwqnawacy p {
+#mmnkiufjaj p {
   margin: 0;
   padding: 0;
 }
 
-#blwqnawacy .gt_table {
+#mmnkiufjaj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -402,12 +435,12 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-left-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_caption {
+#mmnkiufjaj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#blwqnawacy .gt_title {
+#mmnkiufjaj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -419,7 +452,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-bottom-width: 0;
 }
 
-#blwqnawacy .gt_subtitle {
+#mmnkiufjaj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -431,7 +464,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-top-width: 0;
 }
 
-#blwqnawacy .gt_heading {
+#mmnkiufjaj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -443,13 +476,13 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-right-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_bottom_border {
+#mmnkiufjaj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_col_headings {
+#mmnkiufjaj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -464,7 +497,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-right-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_col_heading {
+#mmnkiufjaj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -484,7 +517,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   overflow-x: hidden;
 }
 
-#blwqnawacy .gt_column_spanner_outer {
+#mmnkiufjaj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,15 +529,15 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   padding-right: 4px;
 }
 
-#blwqnawacy .gt_column_spanner_outer:first-child {
+#mmnkiufjaj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#blwqnawacy .gt_column_spanner_outer:last-child {
+#mmnkiufjaj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#blwqnawacy .gt_column_spanner {
+#mmnkiufjaj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -516,11 +549,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   width: 100%;
 }
 
-#blwqnawacy .gt_spanner_row {
+#mmnkiufjaj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#blwqnawacy .gt_group_heading {
+#mmnkiufjaj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +579,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   text-align: left;
 }
 
-#blwqnawacy .gt_empty_group_heading {
+#mmnkiufjaj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -561,15 +594,15 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   vertical-align: middle;
 }
 
-#blwqnawacy .gt_from_md > :first-child {
+#mmnkiufjaj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#blwqnawacy .gt_from_md > :last-child {
+#mmnkiufjaj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#blwqnawacy .gt_row {
+#mmnkiufjaj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,7 +621,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   overflow-x: hidden;
 }
 
-#blwqnawacy .gt_stub {
+#mmnkiufjaj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -601,7 +634,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   padding-right: 5px;
 }
 
-#blwqnawacy .gt_stub_row_group {
+#mmnkiufjaj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +648,15 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   vertical-align: top;
 }
 
-#blwqnawacy .gt_row_group_first td {
+#mmnkiufjaj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#blwqnawacy .gt_row_group_first th {
+#mmnkiufjaj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#blwqnawacy .gt_summary_row {
+#mmnkiufjaj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,16 +666,16 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   padding-right: 5px;
 }
 
-#blwqnawacy .gt_first_summary_row {
+#mmnkiufjaj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_first_summary_row.thick {
+#mmnkiufjaj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#blwqnawacy .gt_last_summary_row {
+#mmnkiufjaj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +685,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-bottom-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_grand_summary_row {
+#mmnkiufjaj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -662,7 +695,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   padding-right: 5px;
 }
 
-#blwqnawacy .gt_first_grand_summary_row {
+#mmnkiufjaj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +705,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-top-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_last_grand_summary_row_top {
+#mmnkiufjaj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,11 +715,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-bottom-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_striped {
+#mmnkiufjaj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#blwqnawacy .gt_table_body {
+#mmnkiufjaj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -695,7 +728,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-bottom-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_footnotes {
+#mmnkiufjaj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -709,7 +742,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-right-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_footnote {
+#mmnkiufjaj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -718,7 +751,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   padding-right: 5px;
 }
 
-#blwqnawacy .gt_sourcenotes {
+#mmnkiufjaj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -732,7 +765,7 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   border-right-color: #D3D3D3;
 }
 
-#blwqnawacy .gt_sourcenote {
+#mmnkiufjaj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -740,127 +773,172 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
   padding-right: 5px;
 }
 
-#blwqnawacy .gt_left {
+#mmnkiufjaj .gt_left {
   text-align: left;
 }
 
-#blwqnawacy .gt_center {
+#mmnkiufjaj .gt_center {
   text-align: center;
 }
 
-#blwqnawacy .gt_right {
+#mmnkiufjaj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#blwqnawacy .gt_font_normal {
+#mmnkiufjaj .gt_font_normal {
   font-weight: normal;
 }
 
-#blwqnawacy .gt_font_bold {
+#mmnkiufjaj .gt_font_bold {
   font-weight: bold;
 }
 
-#blwqnawacy .gt_font_italic {
+#mmnkiufjaj .gt_font_italic {
   font-style: italic;
 }
 
-#blwqnawacy .gt_super {
+#mmnkiufjaj .gt_super {
   font-size: 65%;
 }
 
-#blwqnawacy .gt_footnote_marks {
+#mmnkiufjaj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#blwqnawacy .gt_asterisk {
+#mmnkiufjaj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#blwqnawacy .gt_indent_1 {
+#mmnkiufjaj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#blwqnawacy .gt_indent_2 {
+#mmnkiufjaj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#blwqnawacy .gt_indent_3 {
+#mmnkiufjaj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#blwqnawacy .gt_indent_4 {
+#mmnkiufjaj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#blwqnawacy .gt_indent_5 {
+#mmnkiufjaj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>1</strong>, N = 104"><strong>1</strong>, N = 104</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>2</strong>, N = 16"><strong>2</strong>, N = 16</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Y</td>
-<td headers="stat_1" class="gt_row gt_center"><br></td>
-<td headers="stat_2" class="gt_row gt_center"><br></td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
-<td headers="stat_1" class="gt_row gt_center">2,478 (959)</td>
-<td headers="stat_2" class="gt_row gt_center">2,236 (983)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
-<td headers="stat_1" class="gt_row gt_center">2,398 (1,727, 3,072)</td>
-<td headers="stat_2" class="gt_row gt_center">2,060 (1,491, 2,698)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
-<td headers="stat_1" class="gt_row gt_center">826, 5,607</td>
-<td headers="stat_2" class="gt_row gt_center">1,044, 4,835</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">AGE</td>
-<td headers="stat_1" class="gt_row gt_center"><br></td>
-<td headers="stat_2" class="gt_row gt_center"><br></td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
-<td headers="stat_1" class="gt_row gt_center">32 (9)</td>
-<td headers="stat_2" class="gt_row gt_center">41 (7)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
-<td headers="stat_1" class="gt_row gt_center">30 (25, 39)</td>
-<td headers="stat_2" class="gt_row gt_center">42 (38, 45)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
-<td headers="stat_1" class="gt_row gt_center">18, 49</td>
-<td headers="stat_2" class="gt_row gt_center">28, 50</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">HT</td>
-<td headers="stat_1" class="gt_row gt_center"><br></td>
-<td headers="stat_2" class="gt_row gt_center"><br></td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
-<td headers="stat_1" class="gt_row gt_center">1.78 (0.07)</td>
-<td headers="stat_2" class="gt_row gt_center">1.63 (0.06)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
-<td headers="stat_1" class="gt_row gt_center">1.78 (1.73, 1.82)</td>
-<td headers="stat_2" class="gt_row gt_center">1.63 (1.58, 1.66)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
-<td headers="stat_1" class="gt_row gt_center">1.59, 1.93</td>
-<td headers="stat_2" class="gt_row gt_center">1.52, 1.75</td></tr>
-    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">WT</td>
-<td headers="stat_1" class="gt_row gt_center"><br></td>
-<td headers="stat_2" class="gt_row gt_center"><br></td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
-<td headers="stat_1" class="gt_row gt_center">84 (12)</td>
-<td headers="stat_2" class="gt_row gt_center">73 (11)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
-<td headers="stat_1" class="gt_row gt_center">83 (75, 92)</td>
-<td headers="stat_2" class="gt_row gt_center">70 (64, 81)</td></tr>
-    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
-<td headers="stat_1" class="gt_row gt_center">57, 115</td>
-<td headers="stat_2" class="gt_row gt_center">58, 90</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header gt_col_headings">
+<th id="<strong>Characteristic</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="<strong>1</strong>, N = 104" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>1</strong>, N = 104</th>
+<th id="<strong>2</strong>, N = 16" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>2</strong>, N = 16</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label" style="font-weight: bold">Y</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
+<td class="gt_row gt_center" headers="stat_1">2,478 (959)</td>
+<td class="gt_row gt_center" headers="stat_2">2,236 (983)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
+<td class="gt_row gt_center" headers="stat_1">2,398 (1,727, 3,072)</td>
+<td class="gt_row gt_center" headers="stat_2">2,060 (1,491, 2,698)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
+<td class="gt_row gt_center" headers="stat_1">826, 5,607</td>
+<td class="gt_row gt_center" headers="stat_2">1,044, 4,835</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label" style="font-weight: bold">AGE</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
+<td class="gt_row gt_center" headers="stat_1">32 (9)</td>
+<td class="gt_row gt_center" headers="stat_2">41 (7)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
+<td class="gt_row gt_center" headers="stat_1">30 (25, 39)</td>
+<td class="gt_row gt_center" headers="stat_2">42 (38, 45)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
+<td class="gt_row gt_center" headers="stat_1">18, 49</td>
+<td class="gt_row gt_center" headers="stat_2">28, 50</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label" style="font-weight: bold">HT</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
+<td class="gt_row gt_center" headers="stat_1">1.78 (0.07)</td>
+<td class="gt_row gt_center" headers="stat_2">1.63 (0.06)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
+<td class="gt_row gt_center" headers="stat_1">1.78 (1.73, 1.82)</td>
+<td class="gt_row gt_center" headers="stat_2">1.63 (1.58, 1.66)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
+<td class="gt_row gt_center" headers="stat_1">1.59, 1.93</td>
+<td class="gt_row gt_center" headers="stat_2">1.52, 1.75</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label" style="font-weight: bold">WT</td>
+<td class="gt_row gt_center" headers="stat_1"><br>
+</td>
+<td class="gt_row gt_center" headers="stat_2"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mean (SD)</td>
+<td class="gt_row gt_center" headers="stat_1">84 (12)</td>
+<td class="gt_row gt_center" headers="stat_2">73 (11)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Median (IQR)</td>
+<td class="gt_row gt_center" headers="stat_1">83 (75, 92)</td>
+<td class="gt_row gt_center" headers="stat_2">70 (64, 81)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Range</td>
+<td class="gt_row gt_center" headers="stat_1">57, 115</td>
+<td class="gt_row gt_center" headers="stat_2">58, 90</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -872,7 +950,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Race"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It is observed on the previous plot that there are more subjects of sex <code>1</code>, than <code>2</code> for the 1, 2 and 88 race categories. Meanwhile for the race category <code>7</code>, it seems that there is the same amount of subjects by sex category. It is a shame that the correct labels for these categories are not known for sure.</p>
@@ -881,7 +963,11 @@ dbl (17): ID, CMT, EVID, EVI2, MDV, DV, LNDV, AMT, TIME, DOSE, OCC, RATE, AG...
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a correlation plot using the ggpairs() function from the GGally package.</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(mavoglurant_new, <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">7</span>), <span class="at">progress =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Based on this plot it is observed that the highest correlation is between the variables Height and Weight (0.6), and the linear plots in the middle confirm the distribution of each one of the variables.</p>
@@ -1062,10 +1148,6 @@ Call:
 glm(formula = SEX ~ DOSE, family = binomial(link = "logit"), 
     data = train_data)
 
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--0.7585  -0.6765  -0.4056  -0.4056   2.2534  
-
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)  -1.3581     0.3737  -3.634 0.000279 ***
@@ -1149,10 +1231,6 @@ $ROC_AUC
 Call:
 glm(formula = SEX ~ Y + AGE + WT + HT + DOSE + RACE, family = binomial(link = "logit"), 
     data = train_data2)
-
-Deviance Residuals: 
-     Min        1Q    Median        3Q       Max  
--1.66716  -0.04818  -0.00197  -0.00004   2.05347  
 
 Coefficients:
               Estimate Std. Error z value Pr(&gt;|z|)  
@@ -1450,7 +1528,11 @@ standard deviation, resulting in a divide by 0 error. `NA` will be returned.</co
 <span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Observed Values"</span>, <span class="at">y =</span><span class="st">"Predicted Values"</span>, <span class="at">title =</span> <span class="st">"Predicted vs. Observed Values"</span>)<span class="sc">+</span></span>
 <span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co"># Use a minimal theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The predictions from Null model follows a horizontal line indicating that they assume a single value which is the mean of the outcome variable. The variable Dose in the observed data has only three distinct values, leading the Dose model’s predictions to appear as three horizontal lines in the plot, marked by red dots. One of these predicted values is close to that of the Null model, creating almost overlapping with the predictions from the Null model. The predicted values from the model incorporating all predictors are more dispersed indicating that this model is better than the other two models. However, the scatter still exhibits some pattern. To further investigate the existence of any patterns, I plotted the predicted values against the residuals for this comprehensive model.</p>
@@ -1470,7 +1552,11 @@ standard deviation, resulting in a divide by 0 error. `NA` will be returned.</co
 <span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">2500</span>, <span class="dv">2500</span>) <span class="sc">+</span>  <span class="co">#y-axis limits</span></span>
 <span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="co"># Use a minimal theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The residuals are not randomly scattered around the zero line. We can see that there is a discernible pattern suggesting that the model may not be capturing some of the data features.</p>
@@ -1642,10 +1728,60 @@ standard deviation, resulting in a divide by 0 error. `NA` will be returned.</co
 <span id="cb71-22"><a href="#cb71-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>, <span class="co"># Keeps the legend at the top of the plot</span></span>
 <span id="cb71-23"><a href="#cb71-23" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can see that the original predictions (means) and medians are closely aligned.The predictions generally seem to follow the line at lower values and with shorter Confidence Intervals. This suggests that the model has reasonable predictive accuracy at lower values. However, at higher values of the observed data, some predictions are away from the line with wider confidence intervals indicating higher uncertainty of the predicted values.</p>
+</section>
+</section>
+<section id="part-3" class="level2">
+<h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
+<p>Now doing a final evaluation of the model with all the predictors. In this case I will use the fitted model to make predictions on the test data <code>test_data3</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a prediction using the test data, for the model with all the predictors</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>lmall_predtest <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm_all, <span class="at">new_data =</span> test_data3)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Match predicted with observed</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>lmall_predtest <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(lmall_predtest, test_data3)</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Estimate the metrics for the model with all the variables as predictors</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>lmall_metrictest <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse) <span class="co">#Set the function</span></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lmall_metrictest</span>(lmall_predtest, <span class="at">truth =</span> Y, <span class="at">estimate =</span> .pred) <span class="co">#Compute the RMSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 rmse    standard        518.</code></pre>
+</div>
+</div>
+<p>And then, plotting the observed vs predicted values of this model</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co">#EDIT THIS PART</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Plotting of predicted vs observed data</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lmall_predtest, <span class="fu">aes</span>(<span class="at">x=</span> Y, <span class="at">y=</span> .pred))<span class="sc">+</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> .pred), <span class="at">color =</span> <span class="st">"orangered2"</span>, <span class="at">size=</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Y), <span class="at">color =</span> <span class="st">"steelblue2"</span>, <span class="at">size=</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray20"</span>)<span class="sc">+</span> <span class="co">#Draw the 45 degree line</span></span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5000</span>)<span class="sc">+</span> <span class="co">#Set the x limits</span></span>
+<span id="cb74-8"><a href="#cb74-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">5000</span>)<span class="sc">+</span> <span class="co">#Set the y limits</span></span>
+<span id="cb74-9"><a href="#cb74-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Observed values"</span>, <span class="at">y=</span> <span class="st">"Predicted values"</span>)<span class="sc">+</span></span>
+<span id="cb74-10"><a href="#cb74-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="fitting-exercise_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="overall-model-assessment" class="level4">
+<h4 class="anchored" data-anchor-id="overall-model-assessment">Overall Model Assessment</h4>
+<p>In general, the model with all the variables as predictors (Model 2) seems like the better fit compared to the model where it was used only Dose as a predictor. A good starting point was comparing the RMSE metric between both models and including a null model as reference. In this case, the null model performed the least, which was expected, and Model 2 perfomed better. The next part, which was to conduct an assessment using cross-validation was another way to assess for the validity of the model. Even though in this case we only assessed Model 2 with CV, it was observed that the uncertainties were relatively small when conducting bootstrap. Finally, the next part was to fit the model with a data set split for testing (test data), and it was observed that the predicted values follow a similar patters as observed from the observed values.</p>
+<p>In this case, we chose the most appropriate model in a manner that it doesn’t overfit the data. However, I believe a most accurate model could have been estimated if we had collected other variables. There might be stronger predictors that also, could be generalized to a larger population. I also believe that other metrics such as MAE or R<sup>2</sup> could be added to the model assessment so they help in the model selection process.</p>
 
 
 </section>
@@ -1731,10 +1867,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1744,8 +1879,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1758,6 +1902,120 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1801,6 +2059,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1826,6 +2085,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1886,6 +2171,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

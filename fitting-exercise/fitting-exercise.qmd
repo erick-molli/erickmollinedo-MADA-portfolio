@@ -641,3 +641,40 @@ ggplot(preds_df, aes(x = Observed)) +
 ```
 
 We can see that the original predictions (means) and medians are closely aligned.The predictions generally seem to follow the line at lower values and with shorter Confidence Intervals. This suggests that the model has reasonable predictive accuracy at lower values. However, at higher values of the observed data, some predictions are away from the line with wider confidence intervals indicating higher uncertainty of the predicted values.
+
+## Part 3
+
+Now doing a final evaluation of the model with all the predictors. In this case I will use the fitted model to make predictions on the test data `test_data3`.
+
+```{r}
+#Create a prediction using the test data, for the model with all the predictors
+lmall_predtest <- predict(lm_all, new_data = test_data3)
+
+#Match predicted with observed
+lmall_predtest <- bind_cols(lmall_predtest, test_data3)
+
+#Estimate the metrics for the model with all the variables as predictors
+lmall_metrictest <- metric_set(rmse) #Set the function
+lmall_metrictest(lmall_predtest, truth = Y, estimate = .pred) #Compute the RMSE
+```
+
+And then, plotting the observed vs predicted values of this model
+
+```{r}
+#EDIT THIS PART
+#Plotting of predicted vs observed data
+ggplot(lmall_predtest, aes(x= Y, y= .pred))+
+  geom_point(aes(y = .pred), color = "orangered2", size= 3)+
+  geom_point(aes(y = Y), color = "steelblue2", size= 3)+
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray20")+ #Draw the 45 degree line
+  xlim(0, 5000)+ #Set the x limits
+  ylim(0, 5000)+ #Set the y limits
+  labs(x= "Observed values", y= "Predicted values")+
+  theme_classic()
+```
+
+#### Overall Model Assessment
+
+In general, the model with all the variables as predictors (Model 2) seems like the better fit compared to the model where it was used only Dose as a predictor. A good starting point was comparing the RMSE metric between both models and including a null model as reference. In this case, the null model performed the least, which was expected, and Model 2 perfomed better. The next part, which was to conduct an assessment using cross-validation was another way to assess for the validity of the model. Even though in this case we only assessed Model 2 with CV, it was observed that the uncertainties were relatively small when conducting bootstrap. Finally, the next part was to fit the model with a data set split for testing (test data), and it was observed that the predicted values follow a similar patters as observed from the observed values.
+
+In this case, we chose the most appropriate model in a manner that it doesn't overfit the data. However, I believe a most accurate model could have been estimated if we had collected other variables. There might be stronger predictors that also, could be generalized to a larger population. I also believe that other metrics such as MAE or R^2^ could be added to the model assessment so they help in the model selection process.
