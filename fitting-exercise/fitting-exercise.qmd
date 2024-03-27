@@ -75,6 +75,9 @@ mavoglurant_new <- mavoglurant_new %>%
 
 #Check the structure of the new dataframe
 str(mavoglurant_new)
+
+#Save the cleaned dataframe as an .RDS file
+write_rds(mavoglurant_new, here("ml-models-exercise", "mavoglurant.RDS"))
 ```
 
 ### Exploratory Data Analysis
