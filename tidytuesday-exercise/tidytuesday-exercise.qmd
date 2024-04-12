@@ -1,5 +1,408 @@
 ---
 title: "Tidy Tuesday Exercise"
+author: Erick E. Mollinedo
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+format: html
+editor: visual
 ---
 
-Placeholder file for the future Tidy Tuesday exercise.
+## Tidy Tuesday Exercise
+
+This exerecise is from the Tidy Tuesday dataset from April 8th, 2024.
+
+These are the packages to use for this exercise.
+
+```{r}
+library(here)
+library(tidytuesdayR)
+library(tidyverse)
+library(tidymodels)
+library(naniar)
+library(GGally)
+```
+
+### Data Processing and Exploratory analysis
+
+Load the data set. Given that this dataset contains full and partial eclipse data from both events (2023 and 2024), they were assigned to four different data frames. Then checking the structure of the data frames.
+
+```{r}
+#Load the complete dataset
+tuesdata <- tidytuesdayR::tt_load('2024-04-09')
+
+#Assign the dataset to data frames
+eclipse_annular_2023 <- tuesdata$eclipse_annular_2023
+eclipse_total_2024 <- tuesdata$eclipse_total_2024
+eclipse_partial_2023 <- tuesdata$eclipse_partial_2023
+eclipse_partial_2024 <- tuesdata$eclipse_partial_2024
+
+#Check the structure of the data frames, using different methods
+str(eclipse_partial_2024)
+head(eclipse_annular_2023)
+summary(eclipse_total_2024)
+tail(eclipse_partial_2023)
+```
+
+Now, I determined the duration of annularity or totality for the `eclipse_annular_2023` and `eclipse_total_2024`. Also, determined the beginning of the eclipse in all data frames, which represents the time at first and last contact of the moon with the sun.
+
+```{r}
+# Estimate the total duration and annularity duration (in seconds) for the `eclipse_annular_2023` df
+eclipse_annular_2023 <- eclipse_annular_2023 %>%
+  mutate(total_duration = as.numeric(eclipse_6 - eclipse_1),
+    annularity_duration = as.numeric(eclipse_4 - eclipse_3))
+
+# Estimate the total duration and annularity duration (in seconds) for the `eclipse_total_2024` df
+eclipse_total_2024 <- eclipse_total_2024 %>%
+  mutate(total_duration = as.numeric(eclipse_6 - eclipse_1),
+    annularity_duration = as.numeric(eclipse_4 - eclipse_3))
+
+# Estimate the total duration (in seconds) for the `eclipse_partial_2023` df
+eclipse_partial_2023 <- eclipse_partial_2023 %>%
+  mutate(total_duration = as.numeric(eclipse_5 - eclipse_1))
+
+# Estimate the total duration (in seconds) for the `eclipse_partial_2024` df
+eclipse_partial_2024 <- eclipse_partial_2024 %>%
+  mutate(total_duration = as.numeric(eclipse_5 - eclipse_1))
+```
+
+Now estimate the average total duration and annularity by state, for each eclipse
+
+```{r}
+#Estimate the mean, min and max total duration and annularity duration from each one of the eclipses
+summary_eclipse_annular_2023 <- eclipse_annular_2023 %>% #Annular eclipse 2023
+  group_by(state) %>% 
+  summarise(mean_total_duration_2023 = mean(total_duration), 
+            mean_annularity_duration_2023 = mean(annularity_duration),
+            min_total_duration_2023 = min(total_duration),
+            min_annularity_duration_2023 = min(annularity_duration),
+            max_total_duration_2023 = max(total_duration), 
+            max_annularity_duration_2023 = max(annularity_duration))
+
+summary_eclipse_total_2024 <- eclipse_total_2024 %>% #Total eclipse 2024
+  group_by(state) %>% 
+  summarise(mean_total_duration_2024 = mean(total_duration), 
+            mean_annularity_duration_2024 = mean(annularity_duration),
+            min_total_duration_2024 = min(total_duration), 
+            min_annularity_duration_2024 = min(annularity_duration),
+            max_total_duration_2024 = max(total_duration), 
+            max_annularity_duration_2024 = max(annularity_duration))
+
+summary_eclipse_partial_2023 <- eclipse_partial_2023 %>% #Partial eclipse 2023
+  group_by(state) %>% 
+  summarise(mean_total_duration_2023 = mean(total_duration),
+            min_total_duration_2023 = min(total_duration),
+            max_total_duration_2023 = max(total_duration))
+
+summary_eclipse_partial_2024 <- eclipse_partial_2024 %>% #Partial eclipse 2024
+  group_by(state) %>% 
+  summarise(mean_total_duration_2024 = mean(total_duration),
+            min_total_duration_2024 = min(total_duration),
+            max_total_duration_2024 = max(total_duration))
+```
+
+Make plots to visualize the mean total duration and mean annularity by state. First, to the total eclipse from 2024.
+
+```{r}
+# Arrange the data by mean_total_duration in descending order
+summary_eclipse_total_2024 <- summary_eclipse_total_2024 %>%
+  arrange(desc(mean_total_duration_2024))
+
+# Reshape the data to long format for ggplot
+long_eclipse_total_2024 <- summary_eclipse_total_2024 %>%
+  select(state, mean_total_duration_2024, mean_annularity_duration_2024) %>%
+  pivot_longer(cols = c(mean_total_duration_2024, mean_annularity_duration_2024), names_to = "parameter", values_to = "duration")
+
+# Create the plot
+ggplot(long_eclipse_total_2024, aes(x = reorder(state, duration), y = duration, fill = parameter)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() +  # Flip coordinates to make horizontal bars
+  scale_y_continuous(breaks = seq(0, max(long_eclipse_total_2024$duration), by = 1000)) + #Change the x-scale
+  labs(x = "State", y = "Duration", fill = "Parameter") +
+  theme_minimal()+
+  scale_fill_discrete(name= "Eclipse parameter", labels = c("Mean Annularity", "Mean Total duration"))+
+  theme(axis.text = element_text(size = 10))
+```
+
+Now plotting the visualization of duration of the eclipse to the annular eclipse from 2023
+
+```{r}
+# Arrange the data by mean_total_duration in descending order
+summary_eclipse_annular_2023 <- summary_eclipse_annular_2023 %>%
+  arrange(desc(mean_total_duration_2023))
+
+# Reshape the data to long format for ggplot
+long_eclipse_annular_2023 <- summary_eclipse_annular_2023 %>%
+  select(state, mean_total_duration_2023, mean_annularity_duration_2023) %>%
+  pivot_longer(cols = c(mean_total_duration_2023, mean_annularity_duration_2023), names_to = "parameter", values_to = "duration")
+
+# Create the plot
+ggplot(long_eclipse_annular_2023, aes(x = reorder(state, duration), y = duration, fill = parameter)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() +  # Flip coordinates to make horizontal bars
+  scale_y_continuous(breaks = seq(0, max(long_eclipse_annular_2023$duration), by = 1000)) +
+  labs(x = "State", y = "Duration", fill = "Parameter") +
+  theme_minimal()+
+  scale_fill_discrete(name= "Eclipse parameter", labels = c("Mean Annularity", "Mean Total duration"))+
+  theme(axis.text = element_text(size = 10))
+```
+
+Now also plotting the 2023 and 2024 partial eclipse data:
+
+```{r}
+# Arrange the data by mean_total_duration in descending order
+summary_eclipse_partial_2023 <- summary_eclipse_partial_2023 %>%
+  arrange(desc(mean_total_duration_2023))
+
+# Reshape the data to long format for ggplot
+long_eclipse_partial_2023 <- summary_eclipse_partial_2023 %>%
+  select(state, mean_total_duration_2023) %>%
+  pivot_longer(cols = mean_total_duration_2023, names_to = "parameter", values_to = "duration")
+
+# Create the plot
+ggplot(long_eclipse_partial_2023, aes(x = reorder(state, duration), y = duration)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_y_continuous(breaks = seq(0, max(long_eclipse_partial_2023$duration), by = 1000)) +
+  labs(x = "State", y = "Duration") +
+  theme_minimal()+
+  theme(axis.text = element_text(size = 8))
+```
+
+In my opinion, this data is interesting but by itself, we cannot use to make much inferences. In this case, I decided to include the information about the total area (in sq. miles) of each state, and the total population and try to answer the following question/hypothesis:
+
+Can I predict the state total duration of the partial eclipse based on the area and population?
+
+I searched for the area of each US state and I found them on a Github repository online: https://github.com/jakevdp/data-USstates/blob/master/state-areas.csv. Here, I downloaded the `state-areas.csv` and `state-abbrevs.csv` files.
+
+I also searched the total population by each state and found an excel file that I transformed to .csv and also did some manual editting in excel to remove the headers (sorry if I didn't do it in R :)). This file was obtained from the US Census bureau website here: https://www.census.gov/data/tables/time-series/demo/popest/2020s-state-detail.html
+
+Open the files and perform some data cleaning. Basically, I merged the state abbreviations into their state names and area.
+
+```{r}
+#load the states data files
+usstates <- read_csv(here("tidytuesday-exercise", "data", "raw-data", "state-areas.csv"))
+abbrevs <- read_csv(here("tidytuesday-exercise", "data", "raw-data", "state-abbrevs.csv"))
+uspop <- read_csv(here("tidytuesday-exercise", "data", "raw-data", "SCPRC-EST2023-18+POP.csv"))
+
+#Join both dfs using `left_join()`
+usareas <- left_join(usstates, abbrevs)
+
+#Check the df, and see if there are any missing values
+gg_miss_var(usareas)
+```
+
+The abbreviation of Puerto Rico is missing, so I came up with a piece of code to fix it:
+
+```{r}
+# Replace NA with "PR" in the first occurrence
+for (col in 1:ncol(usareas)) {
+  na_index <- which(is.na(usareas[, col]))
+  if (length(na_index) > 0) {
+    usareas[na_index[1], col] <- "PR"
+  }
+}
+
+#Check again if the missing value was replaced
+gg_miss_var(usareas)
+
+#Also, rename the variable that has the area of each state
+usareas <- usareas %>% rename(area = `area (sq. mi)`)
+```
+
+Now, doing data cleaning in the US population file before merging:
+
+```{r}
+#Delete the . character from the state variable and calculate the young_population variable
+uspop <- uspop %>%
+  mutate(state = str_replace(state, "^\\.", ""),
+         young_population = total_population - adult_population)
+```
+
+Now merging the population and area files:
+
+```{r}
+#Join population and area dataframes
+us_areapop <- full_join(usareas, uspop, by= "state")
+
+#Rename the abbreviaton to 'state' and the state variable to 'name'
+us_areapop <- us_areapop %>% rename(name= "state", state= "abbreviation")
+```
+
+And then, merging the `us_areapop`, `summary_eclipse_partial_2023` and `summary_eclipse_partial_2024` dataframes.
+
+```{r}
+#First join the eclipse data frames
+partial_eclipse <- full_join(summary_eclipse_partial_2023, summary_eclipse_partial_2024, by= "state")
+
+#Then, joining the partial eclipse data frames to the `us_areapop` df.
+partial_eclipse <- full_join(partial_eclipse, us_areapop, by= "state")
+
+#Save the file as .RDS
+write_rds(partial_eclipse, here("tidytuesday-exercise","data", "processed-data", "partial_eclipse.rds"))
+```
+
+I explored the distribution of the predictors (area and population) and the outcome (duration of the partial eclipse), so I get to decide what type of models will be tested.
+
+```{r}
+#Area by state
+ggplot(partial_eclipse, aes(x= area))+
+  geom_histogram(fill= "aquamarine3", color= "red")+
+  labs(x= "US states Area (in sq miles)")
+
+#Population by state
+ggplot(partial_eclipse, aes(x= total_population))+
+  geom_histogram(fill= "aquamarine3", color= "red")+
+  labs(x= "Population by state")
+
+#Eclipse duration
+ggplot(partial_eclipse, aes(x= mean_total_duration_2024))+
+  geom_histogram(fill= "aquamarine3", color= "red")+
+  labs(x= "Partial eclipse duration (in seconds)")
+```
+
+Then, I explored correlations between the outcome and the variables I plan to test in the models:
+
+```{r}
+ggpairs(partial_eclipse, columns = c(5, 9, 11, 12), progress = F)
+```
+
+The data does not appear to follow normality, so it could be better to implement a model that uses the gamma distribution. However, I will also use a linear model with normal distributions just for the goals of this exercise. Also, it seems like there is moderate correlation between area and duration of the eclipse.
+
+### Data Analysis/Modeling
+
+For model evaluation, I used `mean_total_duration` from either 2023 or 2024 as the outcome and `area`, `adult_population` and `young_population` as predictors. I decided to test the following types of models:
+
+1. Linear regression model.
+2. GLM gamma distributed model
+3. Random forest model
+
+First, I will split the data into 70% train and 30% test. Then computing each model and their predictions. Finally computing the metrics.
+
+```{r}
+# Split the data into training and testing sets
+rngseed = 1234
+set.seed(rngseed) # for reproducibility
+data_split <- initial_split(partial_eclipse, prop = 0.7)
+train_data <- training(data_split)
+test_data <- testing(data_split)
+
+#Create formula
+eclipse_formula <- mean_total_duration_2024 ~ area + adult_population + young_population
+
+## ----Model 1---- ##
+lin_mod <- linear_reg() %>% set_engine("lm") #Model specification
+
+lin_wflow <- workflow() %>% #Workflow
+	add_model(lin_mod) %>% 
+	add_formula(eclipse_formula)
+
+lin_fit <- lin_wflow %>% fit(data = train_data) #Fit the model
+
+## ----Model 2---- ##
+glm_mod <- linear_reg(mode = "regression") %>% #Model specification
+  set_engine("glm", family = Gamma(link = "log"))
+
+glm_wflow <- workflow() %>% #Workflow
+  add_model(glm_mod) %>% 
+  add_formula(eclipse_formula)
+
+glm_fit <- glm_wflow %>% fit(data = train_data) #Fit the model
+
+## ----Model 3---- ##
+rf_mod <- rand_forest(mode = "regression") %>% #Model specification
+  set_engine("ranger", seed = rngseed)
+
+rf_wflow <- workflow() %>% #Workflow
+  add_model(rf_mod) %>% 
+  add_formula(eclipse_formula)
+
+rf_fit <- rf_wflow %>% fit(data = train_data)
+
+#Compute the predictions
+lin_pred <- lin_fit %>% predict(train_data)
+glm_pred <- glm_fit %>% predict(train_data)
+rf_pred <- rf_fit %>% predict(train_data)
+
+#Compute the metrics
+lin_metrics <-  bind_cols(train_data, lin_pred) %>% metrics(truth = mean_total_duration_2024, estimate = .pred) 
+glm_metrics <- bind_cols(train_data, glm_pred) %>% metrics(truth = mean_total_duration_2024, estimate = .pred)
+rf_metrics <- bind_cols(train_data, rf_pred) %>% metrics(truth = mean_total_duration_2024, estimate = .pred)
+
+#Print the metrics
+print(lin_metrics)
+print(glm_metrics)
+print(rf_metrics)
+
+#Plot observed vs predicted
+#Create dataframes to compute the plots
+pred1 <- data.frame(predicted = lin_pred$.pred, model = "linear")
+pred2 <- data.frame(predicted = glm_pred$.pred, model = "GLM")
+pred3 <- data.frame(predicted = rf_pred$.pred, model = "RF")
+
+#Merge data frames
+plot_data <- bind_rows(pred1, pred2, pred3) %>% 
+  mutate(observed = rep(train_data$mean_total_duration_2024,3)) 
+
+#Create pred-obs plot
+ggplot(plot_data) +
+  geom_point(aes(x = observed, y = predicted, color = model, shape = model), size= 3) +
+  labs(x = "Observed", y = "Predicted", title = "Predicted vs Observed Plot") +
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "black") +
+  theme_minimal()
+```
+
+I was almost certain that the GLM gamma regression model was going to perform better than the other two. Based on the observed vs predicted values plot and the metrics, I choose the Random forest model as the best. My selection for this model was heavily influenced by the R-square value and the MAE, but also because I was interested into learning more about Random forest models.
+
+Finally, I will do one final performance evaluation by plotting the observed vs predicted values using the `test_data` and also computing the metrics.
+
+```{r}
+#Fit the model using the test data
+rf_fit2 <- rf_wflow %>% fit(data = test_data)
+
+#Make predictions in the test data
+preds2 <- rf_fit2 %>% predict(test_data)
+
+#Compute the metrics
+rf_metrics2 <-  bind_cols(test_data, preds2) %>% metrics(truth = mean_total_duration_2024, estimate = .pred)
+
+print(rf_metrics2)
+
+#Create df with new predictions
+plot_test <- preds2 %>% mutate(observed = rep(test_data$mean_total_duration_2024, 1)) %>% rename(predicted = .pred)
+
+#Bind dfs
+final_plot_data <- bind_rows("train" = filter(plot_data, model == "RF"),
+		"test" = plot_test,
+		.id = "set") %>% 
+	tibble() %>% 
+	select(-model)
+
+#Plot observed vs predicted
+ggplot(final_plot_data) +
+	aes(x = observed, y = predicted, color = set, shape = set) +
+	geom_point(size= 3) +
+	labs(x = "Observed", y = "Predicted", title = "Predicted vs Observed Values") +
+	geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "black") +
+	theme_minimal()+
+  coord_fixed(ratio = 1)
+
+#I will pull out the results of the linear regression model to have an idea of the trend followed by the data
+results <- lin_fit %>% pull_workflow_fit() %>% tidy()
+print(results)
+
+#Calculate residuals and create data frame
+residuals <- data.frame(Observation = 1:36,
+                        Residuals = (train_data$mean_total_duration_2024 - rf_pred$.pred))
+
+# Plot residuals using ggplot
+ggplot(residuals, aes(x = Observation, y = Residuals)) +
+  geom_point(color = "steelblue", size =3) +
+  geom_abline(intercept = 0, slope = 0, linetype = "dashed", color = "black") +
+  labs(title = "Residuals Plot",
+       x = "Observation",
+       y = "Residuals")
+```
+
+Upon checking the model in the test data, it seems like the model still fits and was able to predict closely to the observed values. The residuals look somewhat normal, distributed very close to 0, except for a couple values.
+
+### Discussion
+
+This week's tidy tuesday dataset was about the US' partial and total eclipses from 2023 and 2024. The dataset itself was not big enough to do some modeling, that is why I was able to pull out additional data to do some ML modeling. In summary, I was interested to explore a model that predicts duration of the partial eclipse of 2024 (in seconds), using the area of the state, the population of adults and young population of each state as predictors. I tried a linear regression model, a generalized linear model with gamma distribution and a random forest model to do the model comparisons. Upon further inspection I chose the random forest model to do additional testing due to the metrics and the residuals. When comparing the model to the test data, it produced similar metric results and very much comparable to the train data. Based on the model, there seems to be significant association between the duration of the eclipse and total area and population. These results seem relevant, since the movement of the moon is faster in smaller states and slower in bigger states. Also, population is known to be somewhat associated with the area of the state, explained by land capacity.

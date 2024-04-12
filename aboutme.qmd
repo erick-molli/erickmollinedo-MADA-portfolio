@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-![When I presented my Master's thesis in a poster format](IMG_2080.jpg){fig-align="center" width="307"}
+![When I presented my Master's thesis in a poster format](pictures/IMG_2080.jpg){fig-align="center" width="307"}
 
 ## Background
 
@@ -34,6 +34,6 @@ I have some knowledge about SAS statistical program and R and R Studio programmi
 
 I have met and talked to two Nobel prize winners: Ada Yonath, as a Chemistry nobel prize winner for mapping the structure of the ribosomes and Rigoberta Menchu: Peace nobel prize winner for her continuous work to promote the right of indigenous people in Guatemala after the civil war. (Attaching pics that prove it haha)
 
-| **2016**                        | **2018**                       |
-|---------------------------------|--------------------------------|
-| ![](22feb2016.jpg){width="250"} | ![](Dec_2018.jpg){width="256"} |
+| **2016**                                 | **2018**                                |
+|-------------------------------------|-----------------------------------|
+| ![](pictures/22feb2016.jpg){width="250"} | ![](pictures/Dec_2018.jpg){width="256"} |

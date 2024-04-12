@@ -246,7 +246,7 @@ rf_tune_results <- tune_grid(
 rf_tune_results %>% autoplot()
 ```
 
-It is observed that for this model, the lowest value of `min_n` leads to the best model results (RMSE ~ 250, R-squared ~ 0.94).
+It is observed that for this model, the lowest value of `min_n` leads to the best model results (RMSE \~ 250, R-squared \~ 0.94).
 
 ### Tuning with Cross-validation
 
